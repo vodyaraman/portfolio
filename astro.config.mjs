@@ -19,7 +19,8 @@ export default defineConfig({
           @import "@/styles/common.scss"; 
           @import "@/styles/color-variables.scss";
           @import "@/styles/global.scss";
-          `
+          `,
+          quietDeps: true,
         }
       }
     }

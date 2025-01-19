@@ -1,0 +1,15 @@
+header {
+    @include flexbox(row);
+
+    nav {
+        @include flexbox(row);
+        @include full-parent();
+        margin-top: 3vh;
+        a {
+            @include no-def-styles();
+            @include text-header(2rem, center, 500);
+            padding: 10px 14px;
+            cursor: pointer;
+        }
+    }
+}

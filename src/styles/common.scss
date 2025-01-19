@@ -1,9 +1,17 @@
-@mixin flexbox {
+@mixin flexbox($direction) {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: $direction;
+}
+
+@mixin absolute-fw {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 @mixin full-parent {
@@ -16,10 +24,18 @@
     margin: 0;
 }
 
-@mixin text-header($font-size, $text-align) {
+@mixin no-def-styles {
+    text-decoration: none;
+    outline: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+@mixin text-header($font-size, $text-align, $font-weight) {
     display: block;
     @include primary-color-scheme();
     line-height: $font-size;
     font-size: $font-size;
     text-align: $text-align;
+    font-weight: $font-weight;
 }

@@ -1,0 +1,24 @@
+.landing {
+    @include flexbox(column);
+    @include full-parent();
+    @include no-padding();
+    @include primary-color-scheme();
+
+    .intro {
+        @include flexbox(column);
+
+        &__title {
+            @include text-header(10rem, center, 600);
+            @include no-padding();
+        }
+
+        &__subtitle {
+            @include text-header(3rem, center, 500);
+            @include no-padding();
+        }
+    }
+
+    .cuboid-large-theme {
+        @include absolute-fw();
+    }
+}
