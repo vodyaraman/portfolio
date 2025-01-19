@@ -1,0 +1,7 @@
+$white-color: #fcf7f7;
+$black-color: #58431c;
+
+@mixin primary-color-scheme() {
+    background-color: $black-color;
+    color: $white-color;
+}

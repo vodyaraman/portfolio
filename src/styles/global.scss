@@ -1,0 +1,50 @@
+// Переменные для брейкпоинтов
+$breakpoints: (
+  large-desktop: 1920px,
+  medium-desktop: 1381px,
+  small-desktop: 1001px,
+  phone: 420px
+);
+
+// Миксин для управления размером шрифта
+@mixin font-size($min-width: null, $max-width: null, $size: null) {
+  @if $min-width and $max-width {
+    @media (min-width: $min-width) and (max-width: $max-width) {
+      body, html {
+        font-size: $size;
+      }
+    }
+  } @else if $min-width {
+    @media (min-width: $min-width) {
+      body, html {
+        font-size: $size;
+      }
+    }
+  } @else if $max-width {
+    @media (max-width: $max-width) {
+      body, html {
+        font-size: $size;
+      }
+    }
+  }
+}
+
+// Общие стили
+body {
+  @include no-padding();
+}
+
+// Размеры шрифта для разных устройств
+@include font-size($min-width: map-get($breakpoints, large-desktop), $size: 14px);
+@include font-size(
+  $min-width: map-get($breakpoints, medium-desktop),
+  $max-width: map-get($breakpoints, large-desktop),
+  $size: 13px
+);
+@include font-size(
+  $min-width: map-get($breakpoints, small-desktop),
+  $max-width: map-get($breakpoints, medium-desktop),
+  $size: 12px
+);
+@include font-size($max-width: map-get($breakpoints, small-desktop), $size: 11px);
+@include font-size($max-width: map-get($breakpoints, phone), $size: 11px);
