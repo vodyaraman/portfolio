@@ -1,4 +1,5 @@
 ---
+import ThreeScene from "@/components/cuboid-large-theme/СuboidAnimtaion";
 import Header from "@/components/header/Header";
 ---
 
@@ -7,12 +8,15 @@ import Header from "@/components/header/Header";
 </style>
 
 <main class="landing">
-    <canvas class="cuboid-large-theme">
-
-    </canvas>
-    <article class="intro">
+    <section class="intro">
+        <div class="cuboid-large-theme">
+            <ThreeScene client:load/>
+        </div>
         <h1 class="intro__title">Welcome</h1>
-        <h2 class="intro__subtitle">to saevskii.dev showroom!</h2>
-    </article>
-    <Header client:load/>
+        <h2 class="intro__subtitle">
+            to <code>saevskii.dev</code> showcase!
+        </h2>
+    </section>
+    <Header client:only />
+    <section class="testcontent"></section>
 </main>
