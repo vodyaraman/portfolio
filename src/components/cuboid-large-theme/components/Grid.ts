@@ -8,13 +8,17 @@ export default class Grid {
 
     constructor(gridSize: number, cellSize: number, camera: THREE.OrthographicCamera) {
         // Генерация всех позиций в сетке
-        for (let row = 0; row < gridSize; row++) {
-            for (let col = 0; col < gridSize; col++) {
-                const x = camera.left + cellSize / 2 + col * cellSize;
-                const y = camera.bottom + cellSize / 2 + row * cellSize;
+        for (let col = 0; col < gridSize * 2; col++) {
+            const rowCount = gridSize * 2 - col;
+            // Генерация строк от нижней к верхней
+            for (let row = rowCount - 1; row >= 0; row--) {
+                const x = camera.left + cellSize / 2 + row * cellSize;
+                const y = camera.bottom + cellSize / 2 + col * cellSize;
                 this.positions.push({ x, y });
             }
-        }
+        }        
+
+        console.log(this.positions);
 
         // Определяем левую нижнюю позицию
         this.leftBottomPosition = {

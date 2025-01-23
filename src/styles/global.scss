@@ -34,6 +34,25 @@ body {
   @include no-padding();
 }
 
+::selection {
+  background-color: #02101f6c; 
+  color: #ffffff;
+}
+
+*::-webkit-scrollbar {
+  width: 3px; /* Для Chrome, Safari и Edge */
+}
+
+*::-webkit-scrollbar-track {
+  width: 3px; /* Для Chrome, Safari и Edge */
+  background-color: #e7e4e477;
+}
+
+*::-webkit-scrollbar-thumb {
+  width: 3px; /* Для Chrome, Safari и Edge */
+  background-color: #161616;
+}
+
 // Размеры шрифта для разных устройств
 @include font-size($min-width: map-get($breakpoints, large-desktop), $size: 14px);
 @include font-size(

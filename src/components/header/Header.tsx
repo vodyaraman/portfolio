@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import "./Header.scss";
 
 export default function Header() {
-    const [expanded, setExpanded] = useState(15)
+    const [expanded, setExpanded] = useState(15);
 
     useEffect(() => {
         const e = document.querySelector('.landing');
@@ -32,14 +32,16 @@ export default function Header() {
     }, []);
 
     return (
-        <header className="header">
-            <nav>
-                <a style={{ padding: `10px ${expanded}px`}}>MAIN</a>
-                <a style={{ padding: `10px ${expanded}px`}}>PORTFOLIO</a>
-                <a style={{ padding: `10px ${expanded}px`}}>EDUCATION</a>
-                <a style={{ padding: `10px ${expanded}px`}}>ABOUT</a>
-                <a style={{ padding: `10px ${expanded}px`}}>SUPPORT</a>
-            </nav>
-        </header>
+        <Suspense fallback='Шапка'>
+            <header className={`header ${expanded > window.innerWidth / 20 - 15 && "expanded"}`}>
+                <nav>
+                    <a style={{ padding: `10px ${expanded}px` }}>MAIN</a>
+                    <a style={{ padding: `10px ${expanded}px` }}>PORTFOLIO</a>
+                    <a style={{ padding: `10px ${expanded}px` }}>EDUCATION</a>
+                    <a style={{ padding: `10px ${expanded}px` }}>ABOUT</a>
+                    <a style={{ padding: `10px ${expanded}px` }}>SUPPORT</a>
+                </nav>
+            </header>
+        </Suspense>
     );
 }

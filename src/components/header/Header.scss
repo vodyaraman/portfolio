@@ -5,6 +5,10 @@
     position: sticky;
     z-index: 10;
 
+    &.expanded {
+        @include primary-color-scheme();
+    }
+
     nav {
         @include flexbox(row);
         @include full-parent();
@@ -15,6 +19,7 @@
         a {
             @include no-def-styles();
             @include text-header(1.75rem, center, 500);
+            @include primary-color-scheme();
             padding: 10px 15px;
             cursor: pointer;
             transition: all 0.3s linear;

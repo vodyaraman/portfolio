@@ -4,22 +4,21 @@ export default class Cube {
     mesh: THREE.Mesh;
 
     constructor(size: number, color: number, opacity: number) {
+        // Геометрия куба
         const geometry = new THREE.BoxGeometry(size, size, size);
-        const material = new THREE.MeshBasicMaterial({
+
+        // Стандартный материал с нормалями
+        const material = new THREE.MeshStandardMaterial({
             color,
-            transparent: true, // Включаем прозрачность
-            opacity, // Устанавливаем случайную прозрачность
+            transparent: true,
+            opacity,
+            roughness: 0.2, // Более гладкая поверхность
+            metalness: 0.5, // Добавляем отражения
         });
+
         this.mesh = new THREE.Mesh(geometry, material);
 
-        // Добавляем чёрный контур
-        //const edges = new THREE.EdgesGeometry(geometry);
-        //const lineMaterial = new THREE.LineBasicMaterial({ color: 0x000000 });
-        //const edgesMesh = new THREE.LineSegments(edges, lineMaterial);
-        //this.mesh.add(edgesMesh);
-
-        // Устанавливаем начальный масштаб
-        this.mesh.scale.set(0, 0, 0);
+        this.mesh.scale.set(0, 0, 0); // Устанавливаем начальный масштаб
     }
 
     animateScale(targetScale: { x: number; y: number; z: number }, duration: number) {
@@ -42,5 +41,5 @@ export default class Cube {
         };
 
         requestAnimationFrame(animate);
-    }
+    }    
 }
