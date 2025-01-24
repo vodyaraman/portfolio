@@ -2,18 +2,20 @@ import * as THREE from 'three';
 
 export default class Cube {
     mesh: THREE.Mesh;
+    public color: number;
 
     constructor(size: number, color: number, opacity: number) {
         // Геометрия куба
         const geometry = new THREE.BoxGeometry(size, size, size);
+        this.color = color;
 
         // Стандартный материал с нормалями
         const material = new THREE.MeshStandardMaterial({
             color,
             transparent: true,
             opacity,
-            roughness: 0.2, // Более гладкая поверхность
-            metalness: 0.5, // Добавляем отражения
+            roughness: 0, // Более гладкая поверхность
+            metalness: 0, // Добавляем отражения
         });
 
         this.mesh = new THREE.Mesh(geometry, material);
@@ -41,5 +43,22 @@ export default class Cube {
         };
 
         requestAnimationFrame(animate);
-    }    
+    } 
+    
+    setOpacity() {
+        const material = this.mesh.material as THREE.MeshStandardMaterial;
+    
+        if (material.transparent) {
+            material.opacity = 0.5; // Сбрасываем прозрачность
+        }
+    };
+
+    resetOpacity() {
+        const material = this.mesh.material as THREE.MeshStandardMaterial;
+    
+        if (material.transparent) {
+            material.opacity = 1.0; // Сбрасываем прозрачность
+        }
+    }
+     
 }

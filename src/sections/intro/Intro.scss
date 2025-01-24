@@ -43,9 +43,15 @@
         .cuboid-large-theme {
             @include absolute-fw();
             z-index: 0;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            left: 0px;
 
             &.rotated {
                 transform: rotate(180deg);
+                top: 0%;
+                left: 50%;
             }
         }
     }

@@ -1,25 +1,25 @@
-.header {
-    @include flexbox(row);
+header {
+    @include flexbox(row); 
     transform: translateY(-40vh);
     top: 40vh;
     position: sticky;
     z-index: 10;
 
-    &.expanded {
-        @include primary-color-scheme();
-    }
-
     nav {
         @include flexbox(row);
-        @include full-parent();
-        transition: all 1.5s ease;
-        padding: 0px 50px;
+        @include primary-color-scheme();
         box-sizing: border-box;
+        width: fit-content;
+
+        transition: all 1.5s ease;
+
+        &.expanded {
+            width: 100%;
+        }
 
         a {
             @include no-def-styles();
             @include text-header(1.75rem, center, 500);
-            @include primary-color-scheme();
             padding: 10px 15px;
             cursor: pointer;
             transition: all 0.3s linear;

@@ -33,8 +33,8 @@ export default function Header() {
 
     return (
         <Suspense fallback='Шапка'>
-            <header className={`header ${expanded > window.innerWidth / 20 - 15 && "expanded"}`}>
-                <nav>
+            <header>
+                <nav className={`${expanded > window.innerWidth / 20 - 10 && "expanded"}`}>
                     <a style={{ padding: `10px ${expanded}px` }}>MAIN</a>
                     <a style={{ padding: `10px ${expanded}px` }}>PORTFOLIO</a>
                     <a style={{ padding: `10px ${expanded}px` }}>EDUCATION</a>

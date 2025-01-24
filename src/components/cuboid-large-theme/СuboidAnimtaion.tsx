@@ -1,9 +1,13 @@
-import React, { Component, type CSSProperties, type RefObject } from 'react';
+import React, { Component, type RefObject } from 'react';
 import * as THREE from 'three';
 import Cube from './components/Cube';
 import Grid from './components/Grid';
 
-class ThreeScene extends Component {
+interface ThreeSceneProps {
+    adapt: 'left' | 'right'; // Обязательный пропс для выбора ориентации камеры
+}
+
+class ThreeScene extends Component<ThreeSceneProps> {
     private containerRef: RefObject<HTMLDivElement | null>;
     private scene!: THREE.Scene;
     private camera!: THREE.OrthographicCamera;
@@ -11,8 +15,11 @@ class ThreeScene extends Component {
     private cubes: Cube[] = [];
     private grid!: Grid;
     private animationId?: number;
+    private raycaster = new THREE.Raycaster();
+    private mouse = new THREE.Vector2();
+    private lastIntersectedCube: Cube | null = null;
 
-    constructor(props: {}) {
+    constructor(props: ThreeSceneProps) {
         super(props);
         this.containerRef = React.createRef<HTMLDivElement>();
     }
@@ -27,8 +34,8 @@ class ThreeScene extends Component {
 
         this.scene = new THREE.Scene();
 
-        // Камера!
-        const aspect = window.innerWidth / window.innerHeight;
+        // Настройка камеры
+        const aspect = container.offsetWidth / container.offsetHeight;
         const frustumSize = 10;
 
         this.camera = new THREE.OrthographicCamera(
@@ -39,6 +46,8 @@ class ThreeScene extends Component {
             0.1,
             1000
         );
+
+
         this.camera.position.set(0, 0, 10);
         this.camera.lookAt(0, 0, 0);
 
@@ -47,29 +56,17 @@ class ThreeScene extends Component {
         this.renderer.setClearColor(0x000000, 0);
         container.appendChild(this.renderer.domElement);
 
-        const size = this.calculateSize(); // Размер кубов (вернул как в оригинале)
+        const size = this.calculateSize();
         this.grid = new Grid(7, size, this.camera);
 
-
-        // Свет!
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 5);
         this.scene.add(ambientLight);
-
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-        directionalLight.position.set(5, 10, 7); // Установите позицию света
-        directionalLight.target.position.set(0, 0, 0); // Убедитесь, что свет направлен на центр
-        directionalLight.castShadow = true; // Включение теней для света
-        directionalLight.shadow.mapSize.width = 1024; // Разрешение теневой карты
-        directionalLight.shadow.mapSize.height = 1024;
-
-        this.scene.add(directionalLight);
-
-
 
         this.addCubesWithAnimation();
 
+        this.renderer.domElement.addEventListener('mousemove', this.onMouseMove);
         window.addEventListener('resize', this.handleWindowResize);
-        // Мотор!
+
         this.renderScene();
     }
 
@@ -100,11 +97,22 @@ class ThreeScene extends Component {
         const spawnPosition = this.grid.getSpawnPosition();
         if (!spawnPosition) return;
 
-
         const size = this.calculateSize();
 
-        const opacity = 0.1 + Math.random() * 0.5;
-        const cube = new Cube(size, 0x080529, opacity);
+        const minGray = 50; // Минимальный оттенок серого (светлый)
+        const maxGray = 255; // Максимальный оттенок серого (белый)
+
+        // Генерируем случайное значение серого в указанном диапазоне
+        const grayValue = Math.floor(minGray + Math.random() * (maxGray - minGray));
+
+        // Убедимся, что цвет корректно преобразуется в формат 0xRRGGBB
+        const grayColor = (grayValue << 16) | (grayValue << 8) | grayValue;
+
+        console.log(`Generated gray color: #${grayColor.toString(16).padStart(6, '0')}`); // Для отладки
+
+        // Создаем куб с этим цветом
+        const cube = new Cube(size, grayColor, 1); // Полностью непрозрачный куб
+
         cube.mesh.position.set(spawnPosition.x, spawnPosition.y, 0);
         this.scene.add(cube.mesh);
         cube.animateScale({ x: 1, y: 1, z: 1 }, 1000);
@@ -127,6 +135,54 @@ class ThreeScene extends Component {
         this.renderer.setSize(container.offsetWidth, container.offsetHeight);
     };
 
+    onMouseMove = (event: MouseEvent) => {
+        const rect = this.renderer.domElement.getBoundingClientRect();
+
+        // Преобразование координат мыши в пространство WebGL
+        const normalizedX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        const normalizedY = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        // Учитываем ориентацию окна
+        if (this.props.adapt === 'right') {
+            // Инвертируем X и Y для ориентации "right"
+            this.mouse.x = -normalizedX;
+            this.mouse.y = -normalizedY;
+        } else {
+            // Используем обычные координаты для "left"
+            this.mouse.x = normalizedX;
+            this.mouse.y = normalizedY;
+        }
+
+        // Обновляем луч Raycaster
+        this.raycaster.setFromCamera(this.mouse, this.camera);
+
+        // Проверяем пересечения с кубами
+        const intersects = this.raycaster.intersectObjects(this.cubes.map(cube => cube.mesh));
+
+        if (intersects.length > 0) {
+            const intersectedCube = intersects[0].object;
+
+            // Находим соответствующий куб
+            const cube = this.cubes.find(c => c.mesh === intersectedCube);
+
+            if (cube && cube !== this.lastIntersectedCube) {
+                // Если это новый куб, сбрасываем прозрачность с предыдущего
+                if (this.lastIntersectedCube) {
+                    this.lastIntersectedCube.resetOpacity();
+                }
+
+                // Устанавливаем текущий куб и задаём ему прозрачность
+                this.lastIntersectedCube = cube;
+                cube.setOpacity(); // Устанавливаем прозрачность 0.5
+            }
+        } else if (this.lastIntersectedCube) {
+            // Если курсор ушёл с куба
+            this.lastIntersectedCube.resetOpacity();
+            this.lastIntersectedCube = null;
+        }
+    };
+
+
     renderScene = () => {
         this.renderer.render(this.scene, this.camera);
         this.animationId = requestAnimationFrame(this.renderScene);
@@ -136,9 +192,8 @@ class ThreeScene extends Component {
         const aspectRatio = window.innerWidth / window.innerHeight;
         const baseSize = aspectRatio / 4;
 
-        // Устанавливаем минимальный и максимальный размер для квадрата
-        const minSize = 0.5; // минимальный размер
-        const maxSize = 2;   // максимальный размер
+        const minSize = 0.5;
+        const maxSize = 2;
 
         return Math.min(Math.max(baseSize, minSize), maxSize);
     };
@@ -148,9 +203,6 @@ class ThreeScene extends Component {
             <div
                 ref={this.containerRef}
                 style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
                     width: '100%',
                     height: '100%',
                 }}
