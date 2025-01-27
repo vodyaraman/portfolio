@@ -12,8 +12,8 @@ export default class Grid {
             const rowCount = gridSize * 2 - col;
             // Генерация строк от нижней к верхней
             for (let row = rowCount - 1; row >= 0; row--) {
-                const x = camera.left + cellSize / 2 + row * cellSize;
-                const y = camera.bottom + cellSize / 2 + col * cellSize;
+                const x = camera.left + cellSize / 2 + row * cellSize + 0.1;
+                const y = camera.bottom + cellSize / 2 + col * cellSize + 0.1;
                 this.positions.push({ x, y });
             }
         }        

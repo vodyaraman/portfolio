@@ -9,19 +9,30 @@ export default class Cube {
         const geometry = new THREE.BoxGeometry(size, size, size);
         this.color = color;
 
-        // Стандартный материал с нормалями
+        const texture = new THREE.TextureLoader().load(
+            'textures/108.jpg',
+            () => console.log('Текстура успешно загружена'),
+            undefined,
+            (error) => console.error('Ошибка загрузки текстуры:', error)
+        );
+        
+        // Материал с текстурой ткани
         const material = new THREE.MeshStandardMaterial({
-            color,
-            transparent: true,
-            opacity,
-            roughness: 0, // Более гладкая поверхность
-            metalness: 0, // Добавляем отражения
+            color, // Базовый цвет
+            roughness: 0.4, // Высокая шероховатость для имитации ткани
+            map: texture,
+            opacity, // Прозрачность
+            transparent: true, // Включение прозрачности
         });
-
+    
+        // Создаем меш
         this.mesh = new THREE.Mesh(geometry, material);
-
-        this.mesh.scale.set(0, 0, 0); // Устанавливаем начальный масштаб
+    
+        // Устанавливаем начальный масштаб
+        this.mesh.scale.set(0, 0, 0); // Если это часть анимации, оставляем как есть
     }
+    
+    
 
     animateScale(targetScale: { x: number; y: number; z: number }, duration: number) {
         const startTime = performance.now();
@@ -43,22 +54,27 @@ export default class Cube {
         };
 
         requestAnimationFrame(animate);
-    } 
-    
+    }
+
     setOpacity() {
         const material = this.mesh.material as THREE.MeshStandardMaterial;
-    
+
         if (material.transparent) {
-            material.opacity = 0.5; // Сбрасываем прозрачность
+            material.opacity = 0.5; // Устанавливаем прозрачность
+
+            // Добавляем уменьшение куба
+            this.animateScale({ x: 0.75, y: 0.75, z: 0.75 }, 250);
         }
-    };
+    }
 
     resetOpacity() {
         const material = this.mesh.material as THREE.MeshStandardMaterial;
-    
+
         if (material.transparent) {
             material.opacity = 1.0; // Сбрасываем прозрачность
+
+            // Добавляем увеличение куба
+            this.animateScale({ x: 1, y: 1, z: 1 }, 250);
         }
     }
-     
 }

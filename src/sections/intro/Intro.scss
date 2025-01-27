@@ -39,6 +39,13 @@
                 }
             }
         }
+
+        &__background {
+            @include absolute-fw();
+            z-index: 999;
+            top: 0;
+            left: 0px; 
+        }
         
         .cuboid-large-theme {
             @include absolute-fw();

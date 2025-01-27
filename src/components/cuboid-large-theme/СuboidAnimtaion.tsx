@@ -48,7 +48,7 @@ class ThreeScene extends Component<ThreeSceneProps> {
         );
 
 
-        this.camera.position.set(0, 0, 10);
+        this.camera.position.set(3, 1, 10);
         this.camera.lookAt(0, 0, 0);
 
         this.renderer = new THREE.WebGLRenderer({ alpha: true });
