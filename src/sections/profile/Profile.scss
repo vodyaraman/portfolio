@@ -1,0 +1,46 @@
+.profile {
+    @include flexbox(row);
+    align-items: flex-start;
+    width: 100%;
+    height: 75vh;
+    gap: 20px;
+    padding: 20px 10vw;
+    box-sizing: border-box;
+
+    &__profile-header {
+        @include flexbox(column);
+        justify-content: flex-start;
+        @include primary-color-scheme();
+        @include classic-borders();
+        width: 250px;
+        height: 500px;
+
+        &-image-wrapper {
+            width: 100%;
+            height: 250px;
+
+            img {
+                @include full-parent();
+                @include classic-borders();
+                border-radius: 15px 15px 0 0;
+            }
+        }
+
+        &-title {
+            @include text-header(2.3rem, center, 600);
+        }
+
+        &-descrition {
+            @include text-header(1.5rem, left, 500);
+            color: #707070;
+        }
+    }
+
+    &__profile-content {
+        @include flexbox(column);
+        @include primary-color-scheme();
+        @include classic-borders();
+        flex: 6;
+        height: 100%;
+    }
+}

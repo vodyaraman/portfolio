@@ -1,9 +1,29 @@
 ---
 import Intro from '../sections/intro/Intro.astro';
 import Layout from '../layouts/Layout.astro';
-
+import "@/sections/intro/Intro.scss";
+import "@/sections/profile/Profile.scss";
+import "@/sections/3d-modelling/3d.scss";
+import Header from '@/components/header/Header';
+import Profile from '@/sections/profile/Profile.astro';
 ---
 
 <Layout>
-	<Intro/>
+	<main class="landing">
+		<Intro/>
+		<Header client:only />
+		<section class="testcontent">
+			<img
+				src="https://7d9e88a8-f178-4098-bea5-48d960920605.selcdn.net/85e108d4-0362-451b-ab07-68955f8c1a05/"
+				alt="city-photo"
+			/>
+		</section>
+		<Profile/>
+		<section class="testcontent">
+			<img
+				src="https://i.pinimg.com/1200x/16/73/8a/16738a525b9a43a5a763bd975d86342b.jpg"
+				alt="city-photo"
+			/>
+		</section>
+	</main>
 </Layout>

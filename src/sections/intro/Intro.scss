@@ -44,9 +44,9 @@
             @include absolute-fw();
             z-index: 999;
             top: 0;
-            left: 0px; 
+            left: 0px;
         }
-        
+
         .cuboid-large-theme {
             @include absolute-fw();
             z-index: 0;
@@ -71,47 +71,6 @@
             width: 100%;
             height: 75vh;
             object-fit: cover;
-        }
-    }
-
-    .profile {
-        @include flexbox(row);
-        align-items: flex-start;
-        width: 100%;
-        height: 100vh;
-        gap: 20px;
-        padding: 0 20px;
-        box-sizing: border-box;
-
-        &__profile-header {
-            @include flexbox(column);
-            @include primary-color-scheme();
-            @include classic-borders();
-            transform: translateY(-10vh);
-            flex: 3;
-            height: 50%;
-
-            img {
-                width: 200px;
-                height: 250px;
-            }
-
-            &-title {
-                @include text-header(2rem, center, 600)
-            }
-
-            small {
-                @include text-header(1rem, center, 500)
-            }
-        }
-
-        &__profile-content {
-            @include flexbox(column);
-            @include primary-color-scheme();
-            @include classic-borders();
-            transform: translateY(-10vh);
-            flex: 6;
-            height: 50%;
         }
     }
 }
