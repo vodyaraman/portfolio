@@ -1,79 +1,87 @@
-import React, { Component, createRef } from "react";
-import * as THREE from "three";
+import { Canvas, useThree, useFrame } from '@react-three/fiber';
+import { useRef, useEffect } from 'react';
+import * as THREE from 'three';
+import H1Intro from './elements/H1Intro.tsx';
+import WindEffect from './elements/WindEffect.tsx';
+import FloatingIce from './elements/FloatingIce.tsx';
+import Flag from './elements/Flag.tsx';
 
-class ThreeSphere extends Component {
-  private containerRef = createRef<HTMLDivElement>();
-  private scene!: THREE.Scene;
-  private camera!: THREE.PerspectiveCamera;
-  private renderer!: THREE.WebGLRenderer;
+const BackgroundTexture = ({ texturePath, backgroundColor }: { texturePath: string; backgroundColor: string }) => {
+  const { scene } = useThree();
+  const texture = new THREE.TextureLoader().load(texturePath);
 
-  componentDidMount() {
-    const container = this.containerRef.current;
+  scene.background = new THREE.Color(backgroundColor);
 
-    if (!container) {
-      console.error("Container not found!");
-      return;
-    }
+  const planeGeometry = new THREE.PlaneGeometry(100, 100);
+  const planeMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.9 });
+  const backgroundPlane = new THREE.Mesh(planeGeometry, planeMaterial);
 
-    // Создание сцены
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x000000); // Чёрный фон
+  backgroundPlane.position.z = -15;
+  scene.add(backgroundPlane);
 
-    // Настройка камеры
-    const aspect = container.offsetWidth / container.offsetHeight;
-    this.camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000);
-    this.camera.position.z = 5; // Расположение камеры
+  return null;
+};
 
-    // Создание рендера
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setSize(container.offsetWidth, container.offsetHeight);
-    container.appendChild(this.renderer.domElement);
+const CameraController = () => {
+  const { camera } = useThree();
+  const targetRadius = useRef(10);
+  const mouseX = useRef(0);
 
-    // Добавление света
-    const light = new THREE.PointLight(0xffffff, 1);
-    light.position.set(10, 10, 10);
-    this.scene.add(light);
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      const normalizedX = (event.clientX / window.innerWidth) * 2 - 1;
+      mouseX.current = normalizedX;
+    };
 
-    // Геометрия сферы
-    const geometry = new THREE.SphereGeometry(1, 32, 32);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
-    // Настройка материала (красный цвет)
-    const material = new THREE.MeshStandardMaterial({
-      color: 0xff0000, // Красный цвет
-      roughness: 0.5,
-      metalness: 0.2,
-    });
+  useFrame(() => {
+    const angle = mouseX.current * Math.PI * 0.01;
+    const radius = targetRadius.current;
 
-    // Создание сферы
-    const sphere = new THREE.Mesh(geometry, material);
-    this.scene.add(sphere);
+    camera.position.x = Math.sin(angle) * radius;
+    camera.position.z = Math.cos(angle) * radius;
+    camera.lookAt(0, 0, 0);
+  });
 
-    // Запуск отрисовки
-    this.animate();
-  }
+  return null;
+};
 
-  componentWillUnmount() {
-    if (this.renderer) {
-      this.renderer.dispose();
-    }
-  }
+const IntroBackgroundTheme = () => {
+  return (
+    <Canvas camera={{ position: [0, 2, 10] }}>
+      <BackgroundTexture texturePath="/textures/icy-intro.webp" backgroundColor="transparent" />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[0, 5, 6]} intensity={3} />
 
-  animate = () => {
-    this.renderer.render(this.scene, this.camera);
-    requestAnimationFrame(this.animate);
-  };
-
-  render() {
-    return (
-      <div
-        ref={this.containerRef}
-        style={{
-          width: "100vw",
-          height: "100vh",
-        }}
+      <H1Intro
+        text="Introducing"
+        texturePath="/textures/leather.jpg"
+        positionY={2}
+        fontPath="/fonts/Guerrilla/Protest_Guerrilla_Regular.typeface.json"
       />
-    );
-  }
-}
 
-export default ThreeSphere;
+      <H1Intro
+        text="saevskii.dev showcase!"
+        texturePath="/textures/leather.jpg"
+        positionY={-1}
+        fontPath="/fonts/Oswald/Oswald_Regular.typeface.json"
+        fontSize={1.5}
+      />
+      <CameraController />
+
+      <WindEffect />
+
+      {/*
+      <Flag
+        position={[6, -8, 0]}
+        swingSpeed={2}
+      />*/}
+
+    </Canvas>
+  );
+};
+
+export default IntroBackgroundTheme;

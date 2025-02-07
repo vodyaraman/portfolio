@@ -13,12 +13,12 @@ export default function Header() {
             const currentScroll = e.scrollTop;
             console.log(currentScroll);
 
-            if (currentScroll <= window.innerHeight - 200) {
+            if (currentScroll <= window.innerHeight - 100) {
                 setExpanded(15);
             } else if (currentScroll >= window.innerHeight) {
                 setExpanded(window.innerWidth / 20);
             } else {
-                const start = window.innerHeight - 200;
+                const start = window.innerHeight - 100;
                 const end = window.innerHeight;
                 const progress = (currentScroll - start) / (end - start);
                 const interpolatedValue = 15 + progress * ((window.innerWidth / 20) - 15);
@@ -35,11 +35,11 @@ export default function Header() {
         <Suspense fallback='Шапка'>
             <header>
                 <nav className={`${expanded > window.innerWidth / 20 - 10 && "expanded"}`}>
-                    <a style={{ padding: `10px ${expanded}px` }}>MAIN</a>
-                    <a style={{ padding: `10px ${expanded}px` }}>PORTFOLIO</a>
-                    <a style={{ padding: `10px ${expanded}px` }}>EDUCATION</a>
-                    <a style={{ padding: `10px ${expanded}px` }}>ABOUT</a>
-                    <a style={{ padding: `10px ${expanded}px` }}>SUPPORT</a>
+                    <a style={{ padding: `10px ${expanded}px` }}>• ABOUT</a>
+                    <a style={{ padding: `10px ${expanded}px` }}>• RESUME</a>
+                    <a style={{ padding: `10px ${expanded}px` }}>• PORTFOLIO</a>
+                    <a style={{ padding: `10px ${expanded}px` }}>• STACK</a>
+                    <a style={{ padding: `10px ${expanded}px` }}>• FEEDBACK</a>
                 </nav>
             </header>
         </Suspense>

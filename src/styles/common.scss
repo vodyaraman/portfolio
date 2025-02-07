@@ -34,9 +34,11 @@
     outline: none;
     user-select: none;
     -webkit-user-drag: none;
+    border: none;
 }
 
 @mixin text-header($font-size, $text-align, $font-weight) {
+    font-family: 'Unbounded', sans-serif;
     display: block;
     @include primary-color-scheme();
     line-height: $font-size;
@@ -44,4 +46,5 @@
     text-align: $text-align;
     font-weight: $font-weight;
     background-color: transparent;
+    width: 100%;
 }

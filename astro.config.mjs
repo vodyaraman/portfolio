@@ -1,9 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
 import react from '@astrojs/react';
 
-// https://astro.build/config
 export default defineConfig({
   integrations: [react()],
   vite: {
@@ -12,13 +10,16 @@ export default defineConfig({
         '@': new URL('./src', import.meta.url).pathname,
       },
     },
+    optimizeDeps: {
+      include: ['three', '@react-three/fiber', '@react-three/drei'],
+    },
     css: {
       preprocessorOptions: {
         scss: {
           additionalData: `
-          @import "@/styles/common.scss"; 
-          @import "@/styles/color-variables.scss";
-          @import "@/styles/global.scss";
+            @import "@/styles/common.scss"; 
+            @import "@/styles/color-variables.scss";
+            @import "@/styles/global.scss";
           `,
           quietDeps: true,
         }

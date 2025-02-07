@@ -8,11 +8,21 @@
     "dist"
   ],
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "baseUrl": "./",
+    "module": "nodenext",                    // Required with "moduleResolution": "nodenext"
+    "moduleResolution": "nodenext",          // Resolves ESM modules like Astro correctly
+    "jsx": "react-jsx",                      // Supports React JSX
+    "jsxImportSource": "react",              // Ensures React is used as the JSX source
+    "baseUrl": "./",                         // Enables relative imports from the root directory
     "paths": {
-      "@/*": ["src/*"]
-    }
+      "@/*": ["src/*"]                       // Custom path alias for `@/`
+    },
+    "types": [
+      "@astrojs/react",                      // Astro React integration types
+      "@react-three/fiber",                  // React Three Fiber types
+      "@react-three/drei",                   // Drei types for additional helpers
+      "three"                                // Three.js types
+    ],
+    "strict": true,                          // Enables strict TypeScript checks
+    "skipLibCheck": true                     // Skips checking of declaration files for faster builds
   }
 }

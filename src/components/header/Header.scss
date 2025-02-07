@@ -1,21 +1,16 @@
 header {
-    @include flexbox(row); 
-    transform: translateY(-40vh);
-    top: 40vh;
+    @include flexbox(row);
+    transform: translateY(-30vh);
+    top: 30vh;
     position: sticky;
     z-index: 10;
 
     nav {
         @include flexbox(row);
-        @include primary-color-scheme();
         box-sizing: border-box;
         width: fit-content;
 
         transition: all 1.5s ease;
-
-        &.expanded {
-            width: 100%;
-        }
 
         a {
             @include no-def-styles();
@@ -23,9 +18,10 @@ header {
             padding: 10px 15px;
             cursor: pointer;
             transition: all 0.3s linear;
+            text-wrap: nowrap;
 
             &:hover {
-                background-color: #53535371;
+                background-color: #e0e0e0b9;
             }
         }
     }
