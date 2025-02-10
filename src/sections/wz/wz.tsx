@@ -27,7 +27,7 @@ const TTKCalculator = () => {
                 </div>
 
                 <div>
-                    Темп стрельбы (выстрелов в минуту):
+                    Темп стрельбы:
                     <input
                         type="number"
                         value={rpm}
