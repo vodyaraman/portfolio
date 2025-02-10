@@ -14,34 +14,32 @@ const TTKCalculator = () => {
     };
 
     return (
-        <section className='main-wz'>
-            <div className="ttk-calculator">
-                <h2>Калькулятор TTK</h2>
-                <div>
-                    Урон за выстрел:
-                    <input
-                        type="number"
-                        value={damage}
-                        onChange={(e) => setDamage(e.target.value)}
-                    />
-                </div>
-
-                <div>
-                    Темп стрельбы:
-                    <input
-                        type="number"
-                        value={rpm}
-                        onChange={(e) => setRpm(e.target.value)}
-                    />
-                </div>
-
-                <button onClick={calculateTTK}>Рассчитать TTK</button>
-
-                {ttk !== null && (
-                    <p>Время для убийства: <strong>{ttk.toFixed(3)} сек</strong></p>
-                )}
+        <div className="ttk-calculator">
+            <h2>Калькулятор TTK</h2>
+            <div>
+                Урон за выстрел:
+                <input
+                    type="number"
+                    value={damage}
+                    onChange={(e) => setDamage(e.target.value)}
+                />
             </div>
-        </section>
+
+            <div>
+                Темп стрельбы:
+                <input
+                    type="number"
+                    value={rpm}
+                    onChange={(e) => setRpm(e.target.value)}
+                />
+            </div>
+
+            <button onClick={calculateTTK}>Рассчитать TTK</button>
+
+            {ttk !== null && (
+                <p>Время для убийства: <strong>{ttk.toFixed(3)} сек</strong></p>
+            )}
+        </div>
 
     );
 };
