@@ -1,11 +1,10 @@
 .profile {
-    @include flexbox(row);
-    align-items: flex-start;
+    position: relative;
+    z-index: 10;
+    padding-top: 20px;
     width: 100%;
-    height: 75vh;
-    gap: 20px;
-    padding: 20px 10vw;
-    box-sizing: border-box;
+    height: 100vh;
+    background-color: #e9e2e2;
 
     &__profile-header {
         @include flexbox(column);

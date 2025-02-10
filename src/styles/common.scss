@@ -48,3 +48,31 @@
     background-color: transparent;
     width: 100%;
 }
+
+@mixin scroll-button {
+    position: absolute;
+    bottom: 20px;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    background-color: #4949492c;
+    color: #494949de;
+    font-family: "Oswald", sans-serif;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    backdrop-filter: blur(1px);
+    transition: all 0.5s ease;
+    transform: translateY(20vh);
+    filter: brightness(1.2);
+
+    &:hover {
+        filter: brightness(1);
+        color: #ffffff;
+        font-size: 1.75rem;
+    }
+
+    &.active {
+        transform: translateY(0);
+    }
+}

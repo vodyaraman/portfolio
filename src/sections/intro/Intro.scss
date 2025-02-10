@@ -17,30 +17,7 @@
         .scroll-button {
             @include flexbox(column);
             @include no-def-styles();
-            position: absolute;
-            bottom: 20px;
-            width: 10rem;
-            height: 10rem;
-            border-radius: 50%;
-            background-color: #cccccc2c;
-            backdrop-filter: blur(1px);
-            transition: all 0.5s ease;
-
-            img {
-                width: 60%;
-                height: 75%;
-                opacity: 0.6;
-                object-fit: cover;
-                transition: inherit;
-
-                &:hover {
-                    filter: brightness(0.65) ;
-                }
-            }
-
-            &:hover {
-                filter: brightness(1.2)
-            }
+            @include scroll-button();
         }
 
         &__title {

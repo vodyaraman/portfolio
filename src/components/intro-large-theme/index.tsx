@@ -3,8 +3,6 @@ import { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import H1Intro from './elements/H1Intro.tsx';
 import WindEffect from './elements/WindEffect.tsx';
-import FloatingIce from './elements/FloatingIce.tsx';
-import Flag from './elements/Flag.tsx';
 
 const BackgroundTexture = ({ texturePath, backgroundColor }: { texturePath: string; backgroundColor: string }) => {
   const { scene } = useThree();

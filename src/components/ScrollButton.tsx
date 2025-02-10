@@ -1,4 +1,4 @@
-import React, { useRef, type ReactNode } from "react";
+import React, { useRef, useEffect, type ReactNode } from "react";
 
 interface ScrollButtonProps {
   target: string;
@@ -7,6 +7,17 @@ interface ScrollButtonProps {
 
 const ScrollButton: React.FC<ScrollButtonProps> = ({ target, children }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const button = buttonRef.current;
+    if (!button) return;
+    
+    const timer = setTimeout(() => {
+      button.classList.add("active");
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleScroll = () => {
     if (window.__lenis) {

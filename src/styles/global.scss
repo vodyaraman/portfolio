@@ -72,6 +72,14 @@ section {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Oswald';
+  src: url('/fonts/Oswald/Oswald-Regular.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+
 // Размеры шрифта для разных устройств
 @include font-size($min-width: map-get($breakpoints, large-desktop), $size: 14px);
 @include font-size(
