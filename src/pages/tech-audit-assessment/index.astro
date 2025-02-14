@@ -1,0 +1,11 @@
+---
+import TaskOne from "./Task1";
+import TaskTwo from "./Task2";
+import TaskThreeAnswer from "./task-three";
+---
+
+<section>
+    <TaskOne client:only />
+    <TaskTwo count={1} client:only />
+    <TaskThreeAnswer client:load />
+</section>
