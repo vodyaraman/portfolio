@@ -22,6 +22,6 @@
 👉 [CodePen (финальный проект)](https://codepen.io/Anton-Vodyaraman/pen/YPzPrvq)  
 
 ### **Решения для задач 1-3 представлены ниже:**  
-👉 [Исходный код решений задач 1-3 на GitHub](https://github.com/vodyaraman/portfolio/tree/master/src/pages/tech-audit-assessment)  
+👉 [Исходный код решений задач 1-3 на GitHub](https://github.com/vodyaraman/portfolio/tree/master/src/pages/tech-audit-test)  
 
 
