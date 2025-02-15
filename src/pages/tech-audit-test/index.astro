@@ -2,10 +2,17 @@
 import TaskOne from "./Task1";
 import TaskTwo from "./Task2";
 import TaskThreeAnswer from "./task-three";
+import Readme from "./Readme.md";
+import "./index.scss";
 ---
 
+<head>
+    <meta charset="UTF-8" />
+</head>
+
 <section>
+    <Readme />
     <TaskOne client:only />
-    <TaskTwo count={1} client:only />
+    <TaskTwo initialName="Anton" count={2} client:only />
     <TaskThreeAnswer client:load />
 </section>

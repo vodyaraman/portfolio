@@ -9,10 +9,17 @@ type TransformedData = {
     value: number;
 };
 
+const defaultJson = JSON.stringify([
+    [["id", 1], ["name", "Ivan"], ["age", 23]],
+    [["id", 2], ["name", "Marina"], ["age", 30]],
+    [["id", 3], ["name", "Anna"], ["age", 28]]
+], null, 2);
+
 const TaskOne: React.FC = () => {
-    const [inputData, setInputData] = useState<string>('');
+    const [inputData, setInputData] = useState<string>(defaultJson);
     const [outputData, setOutputData] = useState<TransformedData[]>([]);
 
+    // Solution for the provided task 1
     const transformData = (data: InputData): TransformedData[] => {
         return data.map((entry) => {
             const obj: Record<string, string | number> = Object.fromEntries(entry);
@@ -28,6 +35,7 @@ const TaskOne: React.FC = () => {
             const parsedData: InputData = JSON.parse(inputData);
             if (!Array.isArray(parsedData)) throw new Error();
             setOutputData(transformData(parsedData));
+            console.log("Task 1 output:", transformData(parsedData))
         } catch (error) {
             alert('Ошибка парсинга JSON. Проверьте формат входных данных.');
         }
@@ -39,13 +47,12 @@ const TaskOne: React.FC = () => {
             <textarea
                 rows={5}
                 cols={50}
-                placeholder='Введите JSON, например: [[["id",1],["name","Ivan"],["age",23]]]'
                 value={inputData}
                 onChange={(e) => setInputData(e.target.value)}
             />
             <br />
-            <button onClick={handleTransform}>Преобразовать</button>
-            <h3>Результат:</h3>
+            <button onClick={handleTransform}>Transform</button>
+            <h3>Result (also in console):</h3>
             <ul>
                 {outputData.map((item, index) => (
                     <li key={index}>{item.label} (ID: {item.value})</li>

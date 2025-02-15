@@ -1,0 +1,95 @@
+// Цвета (можно поменять)
+$primary: #007bff;
+$secondary: #6c757d;
+$background: #f8f9fa;
+$text: #212529;
+
+// Общие стили
+body {
+    font-family: Arial, sans-serif;
+    background-color: $background;
+    color: $text;
+    margin: 0;
+    padding: 0;
+}
+
+// Секция с контентом
+section {
+    max-width: 800px;
+    height: 100%;
+    margin-bottom: 5rem;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+// Заголовки
+h2, a {
+    color: $primary;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: darken($primary, 15%);
+}
+
+// Кнопки
+button {
+    background: $primary;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: darken($primary, 10%);
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
+// Поле ввода (textarea)
+textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid $secondary;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+// Список результатов
+ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+        background: lighten($secondary, 40%);
+        padding: 8px;
+        margin: 5px 0;
+        border-radius: 5px;
+    }
+}
+
+// Блок TaskThree
+.task-three {
+    text-align: center;
+    background: lighten($primary, 40%);
+    padding: 15px;
+    border-radius: 5px;
+
+    h1 {
+        font-size: 2rem;
+    }
+}

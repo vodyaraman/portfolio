@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useAppSelector } from "./store/index.ts";
 
 interface Props {
@@ -8,13 +8,19 @@ interface Props {
 const TaskThree: React.FC<Props> = ({ sliceId }) => {
     const dashboardLayout = useAppSelector((state) => state.dashboardLayout.present);
 
-    // Дебаг-лог (проверить, получает ли компонент Redux-данные)
-    console.log("Dashboard Layout:", dashboardLayout);
+    // Filter only el-s with chartId to optimize search
+    const charts = useMemo(
+        () => Object.values(dashboardLayout).filter(item => item.meta.chartId),
+        [dashboardLayout]
+    );
 
-    // Проверяем, существует ли нужный элемент
-    const chartEntry = Object.values(dashboardLayout).find((item) => item.meta.chartId === sliceId);
+    // Chart search with sliceId
+    const chartEntry = useMemo(
+        () => charts.find(item => item.meta.chartId === sliceId),
+        [charts, sliceId]
+    );
 
-    // Получаем название графика
+    // (priority: sliceNameOverride -> sliceName -> "Unknown Chart")
     const customChartName = chartEntry?.meta.sliceNameOverride || chartEntry?.meta.sliceName || "Unknown Chart";
 
     return (
@@ -26,4 +32,3 @@ const TaskThree: React.FC<Props> = ({ sliceId }) => {
 };
 
 export default TaskThree;
-
