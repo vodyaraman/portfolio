@@ -1,10 +1,18 @@
 import { useState } from 'react';
-import "./wz.scss"
+import "./wz.scss";
 
 const TTKCalculator = () => {
+    const [activeTab, setActiveTab] = useState<'ttk' | 'recoil'>('ttk');
+
+    // State для TTK
     const [damage, setDamage] = useState('');
     const [rpm, setRpm] = useState('');
     const [ttk, setTtk] = useState<number | null>(null);
+
+    // State для отдачи
+    const [recoilVert, setRecoilVert] = useState('');
+    const [recoilHorz, setRecoilHorz] = useState('');
+    const [totalRecoil, setTotalRecoil] = useState<number | null>(null);
 
     const calculateTTK = () => {
         const health = 300; // Фиксированное значение здоровья цели
@@ -13,34 +21,91 @@ const TTKCalculator = () => {
         setTtk((shotsNeeded - 1) * timePerShot);
     };
 
+    const calculateRecoil = () => {
+        const shots = 30; // Количество выстрелов для убийства
+        const vertRecoilTotal = shots * (parseFloat(recoilVert) || 0);
+        const horzRecoilTotal = shots * (parseFloat(recoilHorz) || 0);
+        const recoilMagnitude = Math.sqrt(vertRecoilTotal ** 2 + horzRecoilTotal ** 2); // Гипотенуза вектора отдачи
+        setTotalRecoil(recoilMagnitude);
+    };
+
     return (
         <div className="ttk-calculator">
-            <h2>Калькулятор TTK</h2>
-            <div>
-                Урон за выстрел:
-                <input
-                    type="number"
-                    value={damage}
-                    onChange={(e) => setDamage(e.target.value)}
-                />
+            <h2>Калькулятор Warzone 2</h2>
+
+            <div className="tabs">
+                <button 
+                    className={activeTab === 'ttk' ? 'active' : ''}
+                    onClick={() => setActiveTab('ttk')}
+                >
+                    TTK
+                </button>
+                <button 
+                    className={activeTab === 'recoil' ? 'active' : ''}
+                    onClick={() => setActiveTab('recoil')}
+                >
+                    Отдача
+                </button>
             </div>
 
-            <div>
-                Темп стрельбы:
-                <input
-                    type="number"
-                    value={rpm}
-                    onChange={(e) => setRpm(e.target.value)}
-                />
-            </div>
+            {activeTab === 'ttk' && (
+                <div className="tab-content">
+                    <h3>Калькулятор TTK</h3>
+                    <div>
+                        Урон за выстрел:
+                        <input
+                            type="number"
+                            value={damage}
+                            onChange={(e) => setDamage(e.target.value)}
+                        />
+                    </div>
 
-            <button onClick={calculateTTK}>Рассчитать TTK</button>
+                    <div>
+                        Темп стрельбы (RPM):
+                        <input
+                            type="number"
+                            value={rpm}
+                            onChange={(e) => setRpm(e.target.value)}
+                        />
+                    </div>
 
-            {ttk !== null && (
-                <p>Время для убийства: <strong>{ttk.toFixed(3)} сек</strong></p>
+                    <button onClick={calculateTTK}>Рассчитать TTK</button>
+
+                    {ttk !== null && (
+                        <p>Время для убийства: <strong>{ttk.toFixed(3)} сек</strong></p>
+                    )}
+                </div>
+            )}
+
+            {activeTab === 'recoil' && (
+                <div className="tab-content">
+                    <h3>Калькулятор Отдачи</h3>
+                    <div>
+                        Вертикальная отдача (°):
+                        <input
+                            type="number"
+                            value={recoilVert}
+                            onChange={(e) => setRecoilVert(e.target.value)}
+                        />
+                    </div>
+
+                    <div>
+                        Горизонтальная отдача (°):
+                        <input
+                            type="number"
+                            value={recoilHorz}
+                            onChange={(e) => setRecoilHorz(e.target.value)}
+                        />
+                    </div>
+
+                    <button onClick={calculateRecoil}>Рассчитать Отдачу</button>
+
+                    {totalRecoil !== null && (
+                        <p>Общее смещение отдачи: <strong>{totalRecoil.toFixed(2)}°</strong></p>
+                    )}
+                </div>
             )}
         </div>
-
     );
 };
 
