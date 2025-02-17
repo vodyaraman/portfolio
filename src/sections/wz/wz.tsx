@@ -12,6 +12,7 @@ const TTKCalculator = () => {
     // State для отдачи
     const [recoilVert, setRecoilVert] = useState('');
     const [recoilHorz, setRecoilHorz] = useState('');
+    const [recoilKick, setRecoilKick] = useState('');
     const [totalRecoil, setTotalRecoil] = useState<number | null>(null);
 
     const calculateTTK = () => {
@@ -22,10 +23,19 @@ const TTKCalculator = () => {
     };
 
     const calculateRecoil = () => {
-        const shots = 30; // Количество выстрелов для убийства
+        const shots = 30; // Количество выстрелов для расчёта
+
         const vertRecoilTotal = shots * (parseFloat(recoilVert) || 0);
         const horzRecoilTotal = shots * (parseFloat(recoilHorz) || 0);
-        const recoilMagnitude = Math.sqrt(vertRecoilTotal ** 2 + horzRecoilTotal ** 2); // Гипотенуза вектора отдачи
+        const recoilKickTotal = shots * (parseFloat(recoilKick) || 0); // Добавление рывка отдачи
+
+        // Суммарная отдача с учётом рывка
+        const finalVert = vertRecoilTotal + recoilKickTotal;
+        const finalHorz = horzRecoilTotal + recoilKickTotal;
+
+        // Итоговый угол отклонения (по гипотенузе)
+        const recoilMagnitude = Math.sqrt(finalVert ** 2 + finalHorz ** 2);
+
         setTotalRecoil(recoilMagnitude);
     };
 
@@ -95,6 +105,15 @@ const TTKCalculator = () => {
                             type="number"
                             value={recoilHorz}
                             onChange={(e) => setRecoilHorz(e.target.value)}
+                        />
+                    </div>
+
+                    <div>
+                        Рывок оружия при отдаче (°):
+                        <input
+                            type="number"
+                            value={recoilKick}
+                            onChange={(e) => setRecoilKick(e.target.value)}
                         />
                     </div>
 

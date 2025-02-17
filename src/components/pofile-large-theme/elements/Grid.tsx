@@ -57,7 +57,7 @@ const CubesGrid = () => {
                 new MeshStandardMaterial({
                     color: 'red', // Цвет кубов
                     transparent: true,
-                    opacity: 0.5
+                    opacity: 1
                 }),
                 count
             ]}

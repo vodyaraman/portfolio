@@ -7,7 +7,7 @@ const ProfileBackgroundTheme = () => {
         <Canvas
             orthographic // Используем ортографическую камеру
             camera={{
-                position: [0, 0, 10],
+                position: [0, 0.1, 10],
                 zoom: 1, // Уровень масштабирования ортографической камеры
                 near: 0.1,
                 far: 100,
@@ -20,7 +20,6 @@ const ProfileBackgroundTheme = () => {
             <ambientLight intensity={0.5} />
             <directionalLight position={[0, 0, 6]} intensity={3} />
             <CubesGrid />
-            <CameraControls/>
         </Canvas>
     );
 };
