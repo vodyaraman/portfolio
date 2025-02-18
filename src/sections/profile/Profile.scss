@@ -22,21 +22,45 @@
         max-width: 500px;
         width: 100%;
         gap: 10px;
+        box-sizing: border-box;
 
         .profile-card {
             @include flexbox(row);
             @include classic-borders();
             padding: 10px 15px;
             gap: 10px;
-            background-color: #e9e2e2cb;
+            background-color: #e9e2e2d2;
+            backdrop-filter: blur(4px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            transition: all 1s ease;
             transform: translateX(5vw) translateY(10px);
             cursor: pointer;
 
             &:hover {
-                background-color: #f7eeeecb;
-                backdrop-filter: blur(12px);
+                background-color: #f7eeee;
+            }
+
+            &.active {
+                @include flexbox(row);
+                justify-content: space-between;
+                align-items: flex-start;
+                position: absolute;
+                transform: translateX(0) translateY(12vh);
+                animation: expandWidth 1s ease-in-out;
+                width: 90%;
+                height: 60%;
+            }
+
+            @keyframes expandWidth {
+                from {
+                    width: 279px;
+                    height: 77px;
+                }
+
+                to {
+                    width: 90%;
+                    height: 60%;
+                }
             }
 
             &__title {
@@ -58,20 +82,20 @@
     }
 
     &__title {
-        @include text-header(2.75rem, left, 600);
+        @include text-header(3em, left, 600);
         @include no-padding();
 
     }
 
     &__profile-content {
-        @include text-header(1.25rem, left, 400);
+        @include text-header(1.1rem, left, 400);
     }
 }
 
 @media (max-width: 500px) {
     .profile {
         &__content-wrapper {
-            padding: 10px;
+            padding: 10vh 10px;
         }
     }
 }

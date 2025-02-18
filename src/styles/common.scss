@@ -41,7 +41,6 @@
     font-family: 'Unbounded', sans-serif;
     display: block;
     @include primary-color-scheme();
-    line-height: $font-size;
     font-size: $font-size;
     text-align: $text-align;
     font-weight: $font-weight;
