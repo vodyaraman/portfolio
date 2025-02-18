@@ -1,7 +1,18 @@
 ---
-import ProfileBackgroundTheme from "@/components/pofile-large-theme/index.tsx"
+import ProfileBackgroundTheme from "@/components/pofile-large-theme/index.tsx";
+import Content from "./Content.md";
+import ScrollButton from "@/components/ScrollButton";
 ---
 
 <section class="profile">
-    <ProfileBackgroundTheme client:only/>
+    <article class="profile__content-wrapper">
+        <h1 class="profile__title">Junior fullstack Developer</h1>
+        <div class="profile__profile-content">
+            <Content />
+        </div>
+    </article>
+    <ProfileBackgroundTheme client:only />
+    <ScrollButton target=".about" client:load>
+        Experience
+    </ScrollButton>
 </section>

@@ -18,6 +18,7 @@
             @include flexbox(column);
             @include no-def-styles();
             @include scroll-button();
+            transform: translateX(50vw)
         }
 
         &__title {

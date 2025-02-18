@@ -52,6 +52,7 @@
 @mixin scroll-button {
     position: absolute;
     bottom: 20px;
+    left: auto;
     width: 10rem;
     height: 10rem;
     border-radius: 50%;
