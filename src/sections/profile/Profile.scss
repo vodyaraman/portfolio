@@ -27,6 +27,7 @@
         .profile-card {
             @include flexbox(row);
             @include classic-borders();
+            justify-content: space-between;
             padding: 10px 15px;
             gap: 10px;
             background-color: #e9e2e2d2;
@@ -41,30 +42,24 @@
             }
 
             &.active {
-                @include flexbox(row);
-                justify-content: space-between;
-                align-items: flex-start;
-                position: absolute;
-                transform: translateX(0) translateY(12vh);
                 animation: expandWidth 1s ease-in-out;
-                width: 90%;
-                height: 60%;
+                transform: translateX(0) translateY(10px);
+                width: 100%;
             }
 
             @keyframes expandWidth {
                 from {
                     width: 279px;
-                    height: 77px;
                 }
 
                 to {
-                    width: 90%;
-                    height: 60%;
+                    width: 100%;
                 }
             }
 
             &__title {
                 @include text-header(1.5rem, left, 500);
+                @include no-padding();
             }
 
             &__subtitle {
