@@ -2,7 +2,7 @@
     @include flexbox(column);
     z-index: 10;
     padding-top: 3px;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-color: #e9e2e2;
 
@@ -19,14 +19,59 @@
         @include absolute-fw();
         padding: 5vh;
         justify-content: flex-start;
-        max-width: 500px
+        max-width: 500px;
+        width: 100%;
+        gap: 10px;
+
+        .profile-card {
+            @include flexbox(row);
+            @include classic-borders();
+            padding: 10px 15px;
+            gap: 10px;
+            background-color: #e9e2e2cb;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            transform: translateX(5vw) translateY(10px);
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f7eeeecb;
+                backdrop-filter: blur(12px);
+            }
+
+            &__title {
+                @include text-header(1.5rem, left, 500);
+            }
+
+            &__subtitle {
+                @include text-header(1.1rem, left, 400);
+                color: #313131;
+            }
+
+            &__image {
+                width: 5rem;
+                height: 5rem;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
     }
 
     &__title {
-        @include text-header(2.3rem, left, 600);
+        @include text-header(2.75rem, left, 600);
+        @include no-padding();
+
     }
 
     &__profile-content {
-            @include text-header(1.5rem, left, 400);
+        @include text-header(1.25rem, left, 400);
+    }
+}
+
+@media (max-width: 500px) {
+    .profile {
+        &__content-wrapper {
+            padding: 0px 10px;
+        }
     }
 }

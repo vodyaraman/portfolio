@@ -6,13 +6,24 @@ import ScrollButton from "@/components/ScrollButton";
 
 <section class="profile">
     <article class="profile__content-wrapper">
-        <h1 class="profile__title">Junior fullstack Developer</h1>
+        <h1 class="profile__title">Junior fullstack Developer CV</h1>
+        <aside class="profile-card">
+            <div class="profile-card__text-wrapper">
+                <h2 class="profile-card__title">Anton Saevskii</h2>
+                <span class="profile-card__subtitle"
+                    >22 y.o., Murmansk, Russia
+                </span>
+            </div>
+            <img
+                class="profile-card__image"
+                src="/mainphotos/profile_photo.jpg"
+                alt="photo"
+            />
+        </aside>
         <div class="profile__profile-content">
             <Content />
         </div>
     </article>
     <ProfileBackgroundTheme client:only />
-    <ScrollButton target=".about" client:load>
-        Experience
-    </ScrollButton>
+    <ScrollButton target=".about" client:load> Experience </ScrollButton>
 </section>
