@@ -97,38 +97,14 @@
         @include no-padding();
         position: relative;
         background:
-            url('https://s5.stc.all.kpcdn.net/woman/wp-content/uploads/2024/01/osman-rana-k-chemu-snitsya-led.jpg');
+            url('https://hightech.fm/wp-content/uploads/2022/03/ice-6538605_1280.jpg');
         background-clip: text;
         background-size: cover;
         background-position: 150% 50%;
         -webkit-text-fill-color: transparent;
-        -webkit-text-stroke: 1px #ffffffb6;
+        -webkit-text-stroke: 1px #ffffff;
         z-index: 2;
-    
-        &::before,
-        &::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(52, 196, 221, 0.432) 10%, rgba(255, 255, 255, 0) 80%);
-            filter: blur(50px);
-            transform: translate(-50%, -50%) scale(1.2);
-            z-index: -1; 
-            pointer-events: none;
-        }
-    
-        &::after {
-            top: 60%;
-            left: 40%;
-            width: 150px;
-            height: 150px;
-            filter: blur(40px);
-            opacity: 0.7;
-        }
+        filter: brightness(0.5)
     }
     
     
