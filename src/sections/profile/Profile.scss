@@ -4,6 +4,7 @@
     padding-top: 3px;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
     background-color: #e9e2e2;
 
     .scroll-button {
@@ -94,21 +95,43 @@
     &__title {
         @include text-header(3em, left, 600);
         @include no-padding();
-        -webkit-text-stroke: 1px rgb(21, 22, 22);
-        paint-order: stroke fill;
-        text-shadow:
-            -1px -1px 0 black,
-            1px -1px 0 black,
-            -1px 1px 0 black,
-            1px 1px 0 black;
-        text-shadow: revert;
+        position: relative;
         background:
-            url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfyjkfZIG65GzoXoW3LZ_DzVfeg1QxaV281ykMoj6GRZQ05jfow4IrVVRRlXPjKLgVI-s&usqp=CAU');
+            url('https://s5.stc.all.kpcdn.net/woman/wp-content/uploads/2024/01/osman-rana-k-chemu-snitsya-led.jpg');
         background-clip: text;
         background-size: cover;
         background-position: 150% 50%;
         -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 1px #ffffffb6;
+        z-index: 2;
+    
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(52, 196, 221, 0.432) 10%, rgba(255, 255, 255, 0) 80%);
+            filter: blur(50px);
+            transform: translate(-50%, -50%) scale(1.2);
+            z-index: -1; 
+            pointer-events: none;
+        }
+    
+        &::after {
+            top: 60%;
+            left: 40%;
+            width: 150px;
+            height: 150px;
+            filter: blur(40px);
+            opacity: 0.7;
+        }
     }
+    
+    
 
     .profile-content {
         @include text-header(1.1rem, left, 400);
@@ -116,10 +139,10 @@
         width: 100%;
         text-wrap: wrap;
         overflow: hidden;
-        
-            &__heading {
-                color: #2c3e50;
-            }              
+
+        &__heading {
+            color: #2c3e50;
+        }
     }
 }
 

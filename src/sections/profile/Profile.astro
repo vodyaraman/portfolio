@@ -27,7 +27,10 @@ const content = `
 
 <section class="profile">
     <article class="profile__content-wrapper">
-        <h1 class="profile__title">Junior fullstack Developer CV</h1>
+        <h1 class="profile__title" data-text="Junior fullstack Developer CV">
+            Junior fullstack Developer CV
+            <div class="profile__title-shadow"/>
+        </h1>
         <ProfileAccount client:visible />
         <TextTranslator content={content} client:only>
             <Content />
