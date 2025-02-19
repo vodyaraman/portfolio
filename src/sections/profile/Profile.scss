@@ -58,12 +58,42 @@
                 border-radius: 50%;
                 object-fit: cover;
             }
+
+            &__overlay {
+                @include flexbox(row);
+                @include classic-borders();
+                position: absolute;
+                left: 0;
+                padding: 10px 25px;
+                box-sizing: border-box;
+                @include full-parent();
+                justify-content: space-between;
+                background-color: #1a191948;
+                backdrop-filter: blur(3px);
+            }
+
+            &__link,
+            &__copy-email {
+                @include no-def-styles();
+                border-radius: 100%;
+                background-color: transparent;
+                img {
+                    border-radius: 50px;
+                    overflow: hidden;
+
+                }
+            }
         }
     }
 
     &__title {
         @include text-header(3em, left, 600);
         @include no-padding();
+        background: url('https://indicator.ru/thumb/1360x0/filters:quality(75):no_upscale()/imgs/2019/08/13/13/3515142/4ad7f59ceff12fefa41ccc4b7cc685b3f41e7381.jpg');
+        background-clip: text;
+        background-size: cover;
+        background-position: 150% 50%;
+        -webkit-text-fill-color: transparent;
 
     }
 
@@ -75,7 +105,8 @@
 @media (max-width: 500px) {
     .profile {
         &__content-wrapper {
-            padding: 7.5vh 10px;
+            padding: 7.5vh 15px;
+
             .profile-card {
                 transform: translateX(0) translateY(10px);
                 width: 100%;

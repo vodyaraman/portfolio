@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
+import { gsap } from 'gsap';
 
 const ProfileCard = () => {
-  const [isActive, setIsActive] = useState(false);
+  const overlayRef = useRef(null);
+  const email = "a.vodyaraman@gmail.com";
 
-  const handleClick = () => {
-    setIsActive(!isActive);
+  const handleMouseEnter = () => {
+    gsap.to(overlayRef.current, { opacity: 1, duration: 0.3, ease: "power2.out" });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(overlayRef.current, { opacity: 0, duration: 0.3, ease: "power2.in" });
+  };
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(email);
   };
 
   return (
-    <aside 
-      className={`profile-card${isActive ? ' active' : ''}`} 
-      onClick={handleClick}
+    <aside
+      className="profile-card"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <div className="profile-card__text-wrapper" draggable='false'>
         <h2 className="profile-card__title">Anton Saevskii</h2>
@@ -23,6 +34,31 @@ const ProfileCard = () => {
         src="/mainphotos/profile_photo.jpg"
         alt="photo"
       />
+
+      <div className="profile-card__overlay" ref={overlayRef} style={{ opacity: 0 }}>
+        <a
+          className="profile-card__link profile-card__link--hh"
+          href="https://hh.ru"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src='/icons/hh_ru.svg' />
+        </a>
+        <a
+          className="profile-card__link profile-card__link--telegram"
+          href="https://t.me/your_username"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src='/icons/tg.svg' />
+        </a>
+        <button
+          className="profile-card__copy-email"
+          onClick={handleCopyEmail}
+        >
+          <img src='/icons/google.svg' />
+        </button>
+      </div>
     </aside>
   );
 };
