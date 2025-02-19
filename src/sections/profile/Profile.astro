@@ -2,16 +2,36 @@
 import ProfileBackgroundTheme from "@/components/pofile-large-theme/index.tsx";
 import Content from "./Content.md";
 import ScrollButton from "@/components/ScrollButton";
-import ProfileAccount from "@/components/profile-account/ProfileAccount";
+import ProfileAccount from "@/components/profile/ProfileAccount";
+import { TextTranslator } from "@/components/profile/ProfileContent";
+
+const content = `
+## Professional qualities
+- Commitment to continuous professional growth
+- Interest in modern web development technologies
+- Quick adaptation to new methodologies, frameworks, libraries
+
+## Social skills
+- Effective teamwork, politeness, friendliness
+- Extremely high speed of learning new material
+- Responsibility, attention to quality, time management
+- **English:** B2 (certificate **Prague Language Institute, 2019**)
+
+## Additional information
+- Fully remote work
+- Ready to work 60+ hours per week
+- Interest in application development in any programming languages
+- Expected salary from 60k RUB initially
+`;
 ---
 
 <section class="profile">
     <article class="profile__content-wrapper">
         <h1 class="profile__title">Junior fullstack Developer CV</h1>
-        <ProfileAccount client:visible/>
-        <div class="profile__profile-content">
+        <ProfileAccount client:visible />
+        <TextTranslator content={content} client:only>
             <Content />
-        </div>
+        </TextTranslator>
     </article>
     <ProfileBackgroundTheme client:only />
     <ScrollButton target=".about" client:load> Experience </ScrollButton>

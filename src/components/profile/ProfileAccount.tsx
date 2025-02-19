@@ -6,11 +6,11 @@ const ProfileCard = () => {
   const email = "a.vodyaraman@gmail.com";
 
   const handleMouseEnter = () => {
-    gsap.to(overlayRef.current, { opacity: 1, duration: 0.3, ease: "power2.out" });
+    gsap.to(overlayRef.current, { opacity: 1, duration: 0.4, ease: "power2.out" });
   };
 
   const handleMouseLeave = () => {
-    gsap.to(overlayRef.current, { opacity: 0, duration: 0.3, ease: "power2.in" });
+    gsap.to(overlayRef.current, { opacity: 0, duration: 0.4, ease: "power2.in" });
   };
 
   const handleCopyEmail = () => {
@@ -38,7 +38,7 @@ const ProfileCard = () => {
       <div className="profile-card__overlay" ref={overlayRef} style={{ opacity: 0 }}>
         <a
           className="profile-card__link profile-card__link--hh"
-          href="https://hh.ru"
+          href="https://hh.ru/resume/3a469acbff0d13c2f80039ed1f767966733052"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -46,7 +46,7 @@ const ProfileCard = () => {
         </a>
         <a
           className="profile-card__link profile-card__link--telegram"
-          href="https://t.me/your_username"
+          href="https://t.me/vodyaraman"
           target="_blank"
           rel="noopener noreferrer"
         >

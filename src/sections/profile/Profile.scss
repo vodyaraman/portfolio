@@ -77,10 +77,15 @@
                 @include no-def-styles();
                 border-radius: 100%;
                 background-color: transparent;
+
                 img {
                     border-radius: 50px;
                     overflow: hidden;
+                    cursor: pointer;
 
+                    &:hover {
+                        filter: brightness(1.1)
+                    }
                 }
             }
         }
@@ -89,16 +94,32 @@
     &__title {
         @include text-header(3em, left, 600);
         @include no-padding();
-        background: url('https://indicator.ru/thumb/1360x0/filters:quality(75):no_upscale()/imgs/2019/08/13/13/3515142/4ad7f59ceff12fefa41ccc4b7cc685b3f41e7381.jpg');
+        -webkit-text-stroke: 1px rgb(21, 22, 22);
+        paint-order: stroke fill;
+        text-shadow:
+            -1px -1px 0 black,
+            1px -1px 0 black,
+            -1px 1px 0 black,
+            1px 1px 0 black;
+        text-shadow: revert;
+        background:
+            url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfyjkfZIG65GzoXoW3LZ_DzVfeg1QxaV281ykMoj6GRZQ05jfow4IrVVRRlXPjKLgVI-s&usqp=CAU');
         background-clip: text;
         background-size: cover;
         background-position: 150% 50%;
         -webkit-text-fill-color: transparent;
-
     }
 
-    &__profile-content {
+    .profile-content {
         @include text-header(1.1rem, left, 400);
+        max-width: inherit;
+        width: 100%;
+        text-wrap: wrap;
+        overflow: hidden;
+        
+            &__heading {
+                color: #2c3e50;
+            }              
     }
 }
 

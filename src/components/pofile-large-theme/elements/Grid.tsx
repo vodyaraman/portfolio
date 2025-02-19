@@ -51,7 +51,7 @@ const CubesGrid = () => {
     // Геометрия и материал
     const geometry = useMemo(() => new BoxGeometry(boxSize, boxSize, boxSize), [boxSize]);
     const material = useMemo(() => new MeshStandardMaterial({ 
-        color: '#f000', 
+        color: '#fff', 
         transparent: true,
         opacity: 0.5
     }), []);

@@ -11,7 +11,10 @@ export default defineConfig({
       },
     },
     optimizeDeps: {
-      include: ['three', '@react-three/fiber', '@react-three/drei'],
+      include: ['three', '@react-three/fiber', '@react-three/drei', 'gsap'],
+    },
+    ssr: {
+      noExternal: ['gsap']
     },
     css: {
       preprocessorOptions: {
