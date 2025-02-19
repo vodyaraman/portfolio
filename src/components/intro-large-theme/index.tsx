@@ -4,14 +4,13 @@ import * as THREE from 'three';
 import H1Intro from './elements/H1Intro.tsx';
 import WindEffect from './elements/WindEffect.tsx';
 
-const BackgroundTexture = ({ texturePath, backgroundColor }: { texturePath: string; backgroundColor: string }) => {
+const BackgroundTexture = ({ texturePath }: { texturePath: string }) => {
   const { scene } = useThree();
   const texture = new THREE.TextureLoader().load(texturePath);
 
-  scene.background = new THREE.Color(backgroundColor);
 
   const planeGeometry = new THREE.PlaneGeometry(100, 100);
-  const planeMaterial = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.9 });
+  const planeMaterial = new THREE.MeshBasicMaterial({ map: texture});
   const backgroundPlane = new THREE.Mesh(planeGeometry, planeMaterial);
 
   backgroundPlane.position.z = -15;
@@ -50,7 +49,7 @@ const CameraController = () => {
 const IntroBackgroundTheme = () => {
   return (
     <Canvas camera={{ position: [0, 2, 10] }}>
-      <BackgroundTexture texturePath="/textures/icy-intro.webp" backgroundColor="transparent" />
+      <BackgroundTexture texturePath="/textures/icy-intro.webp"/>
       <ambientLight intensity={0.5} />
       <directionalLight position={[0, 5, 6]} intensity={3} />
 

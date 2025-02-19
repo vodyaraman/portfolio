@@ -62,16 +62,11 @@
     font-size: 1.5rem;
     backdrop-filter: blur(1px);
     transition: all 0.5s ease;
-    transform: translateY(20vh);
     filter: brightness(1.2);
 
     &:hover {
         filter: brightness(1);
         color: #ffffff;
         font-size: 1.75rem;
-    }
-
-    &.active {
-        transform: translateY(0);
     }
 }

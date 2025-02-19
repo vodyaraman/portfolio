@@ -11,6 +11,7 @@
 
     .intro {
         @include flexbox(column);
+        width: 100vw;
         height: 100vh;
         z-index: 2;
 
@@ -18,7 +19,6 @@
             @include flexbox(column);
             @include no-def-styles();
             @include scroll-button();
-            transform: translateX(50vw)
         }
 
         &__title {

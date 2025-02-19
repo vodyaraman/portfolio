@@ -1,30 +1,42 @@
 import { Center, Text3D } from '@react-three/drei';
 import { useRef, useEffect, useState } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 interface H1IntroProps {
   text: string;
   texturePath: string;
   positionY: number;
-  fontPath?: string;      // Новый пропс для шрифта
-  fontSize?: number;       // Новый пропс для размера текста
-  rotationX?: number;      // Новый пропс для угла наклона по оси X
+  fontPath?: string;
+  fontSize?: number;
+  rotationX?: number;
 }
 
 const H1Intro = ({
   text,
   texturePath,
   positionY,
-  fontPath = '/fonts/Guerrilla/Protest_Guerrilla_Regular.typeface.json', // Значение по умолчанию
-  fontSize = 2.5,            // Значение по умолчанию
-  rotationX = 0              // По умолчанию нет наклона
+  fontPath = '/fonts/Guerrilla/Protest_Guerrilla_Regular.typeface.json',
+  fontSize = 2.5,
+  rotationX = 0
 }: H1IntroProps) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
-  const windStrength = 0.3; // Сила ветра
-  const windSpeed = 2.0;    // Скорость изменения
-  const windOffset = Math.random() * Math.PI; // Разный сдвиг для каждого текста
+  const windStrength = 0.3;
+  const windSpeed = 2.0;
+  const windOffset = Math.random() * Math.PI;
+
+  const { size } = useThree();
+
+  // Удаляем статичное определение isMobile
+  const getAdaptiveValues = () => {
+    const isMobile = size.width < 768;
+    return {
+      fontSize: isMobile ? fontSize * 0.5 : fontSize,
+      positionY: isMobile ? positionY * 0.5 : positionY,
+      positionX: isMobile ? 1.1 : 0
+    };
+  };
 
   useEffect(() => {
     const loader = new THREE.TextureLoader();
@@ -37,16 +49,19 @@ const H1Intro = ({
     if (meshRef.current) {
       meshRef.current.rotation.y = Math.PI / 5.5;
       meshRef.current.rotation.x = 0.075;
-      meshRef.current.position.y = positionY;
+      // Обновляем только позицию Y
+      meshRef.current.position.y = getAdaptiveValues().positionY;
     }
-  }, [rotationX, positionY]);
+  }, [rotationX, positionY, size.width]); // Добавляем size.width в зависимости
 
   useFrame(({ clock }) => {
     if (meshRef.current) {
+      const { positionX } = getAdaptiveValues();
       const time = clock.getElapsedTime();
       const windEffect = Math.sin(time * windSpeed + windOffset) * windStrength;
-
-      meshRef.current.position.x = windEffect;
+      
+      // Комбинируем адаптивную позицию и эффект ветра
+      meshRef.current.position.x = positionX + windEffect;
       meshRef.current.rotation.z = windEffect * 0.05;
     }
   });
@@ -55,8 +70,8 @@ const H1Intro = ({
     <Center>
       <Text3D
         ref={meshRef}
-        font={fontPath}       // Использование выбранного шрифта
-        size={fontSize}       // Использование выбранного размера текста
+        font={fontPath}
+        size={getAdaptiveValues().fontSize}
         height={0.5}
         letterSpacing={-0.075}
         curveSegments={12}
@@ -65,7 +80,7 @@ const H1Intro = ({
         bevelSize={0.02}
         bevelSegments={5}
         material={[
-          new THREE.MeshStandardMaterial({ color: 'alicablue' }),
+          new THREE.MeshStandardMaterial({ color: 'white' }),
           new THREE.MeshBasicMaterial({ color: 'black' }),
         ]}
       >
