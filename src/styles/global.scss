@@ -93,4 +93,4 @@ section {
   $size: 12px
 );
 @include font-size($max-width: map-get($breakpoints, small-desktop), $size: 11px);
-@include font-size($max-width: map-get($breakpoints, phone), $size: 11px);
+@include font-size($max-width: map-get($breakpoints, phone), $size: 10px);

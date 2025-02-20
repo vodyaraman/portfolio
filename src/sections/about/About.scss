@@ -1,4 +1,4 @@
-.about {
+.exp {
     position: relative;
     z-index: 10;
     width: 100%;
@@ -17,7 +17,7 @@
         @include text-header(2.3rem, left, 600);
     }
 
-    &__profile-content {
+    &__exp-content {
             @include text-header(1.5rem, left, 400);
     }
 }
