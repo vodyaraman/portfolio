@@ -1,0 +1,60 @@
+---
+import ScrollButton from "@/components/ScrollButton";
+
+---
+
+<section class="stack">
+    <article class="stack__content-wrapper">
+        <h1 class="stack__title">
+            Theoretical and practical stack
+        </h1>
+        <div class="stack__stack-content">
+            <button class="stack__toggle" aria-stackanded="false">
+                Навыки
+            </button>
+            <div class="stack__details">
+                <button class="stack__toggle" aria-stackanded="false">
+                    Frontend
+                </button>
+                <div class="stack__details">
+                    <ul>
+                        <li>HTML5, XML, CSS3, SCSS (SASS), адаптивная вёрстка, кроссбраузерная вёрстка, создание анимаций, отзывчивый интерфейс, а также опыт макетирования в Figma</li>
+                        <li>JavaScript, TypeScript, React (и React Redux), в т.ч. Astro.js, Next.js, React Native, создание анимаций, оптимизация компонентов, методология (архитектура) Feature Sliced Design</li>
+                    </ul>
+                </div>
+                <button class="stack__toggle" aria-stackanded="false">
+                    Backend
+                </button>
+                <div class="stack__details">
+                    <ul>
+                        <li>JavaScript, TypeScript (stackress.js, Nest.js, Feathers.js), Python, C#</li>
+                        <li>HTTP, WebSocket, API, архитектура RestAPI, маппинг больших данных</li>
+                    </ul>
+                </div>
+                <button class="stack__toggle" aria-stackanded="false">
+                    Базы данных
+                </button>
+                <div class="stack__details">
+                    <ul>
+                        <li>PostgreSQL, MySQL Workbench, phpMyAdmin</li>
+                        <li>MongoDB</li>
+                        <li>Firebase, BigQuery</li>
+                    </ul>
+                </div>
+                <button class="stack__toggle" aria-stackanded="false">
+                    Инструменты разработки и её организация
+                </button>
+                <div class="stack__details">
+                    <ul>
+                        <li>Docker (Docker compose)</li>
+                        <li>Git (GitHub, GitLens)</li>
+                        <li>промтбилдинг ChatGPT, Gemini</li>
+                        <li>Google Colab (Jupyter Notebook)</li>
+                        <li>Pyrus, Notion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </article>
+    <ScrollButton target=".exp" client:load> Experience </ScrollButton>
+</section>

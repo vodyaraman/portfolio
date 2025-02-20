@@ -4,9 +4,13 @@ import Layout from "../layouts/Layout.astro";
 import "@/sections/intro/Intro.scss";
 import "@/sections/profile/Profile.scss";
 import "@/sections/3d-modelling/3d.scss";
-import "@/sections/exp/Exp.scss"
+import "@/sections/exp/Exp.scss";
+import "@/sections/stack/Stack.scss";
+import "@/sections/portfolio/Portfolio.scss";
 import Profile from "@/sections/profile/Profile.astro";
+import Stack from "@/sections/stack/Stack.astro";
 import Exp from "@/sections/exp/Exp.astro";
+import Portfolio from "@/sections/portfolio/Portfolio.astro";
 ---
 
 <script>
@@ -68,6 +72,8 @@ import Exp from "@/sections/exp/Exp.astro";
 	<main class="landing">
 		<Intro />
 		<Profile/>
+		<Stack/>
 		<Exp/>
+		<Portfolio/>
 	</main>
 </Layout>

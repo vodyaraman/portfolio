@@ -1,11 +1,50 @@
 ---
-import ProfileBackgroundTheme from "@/components/pofile-large-theme/index.tsx";
+import ScrollButton from "@/components/ScrollButton";
+
+
 ---
 
 <section class="exp">
     <article class="exp__content-wrapper">
-        <h1 class="exp__title">Commercial and pet-project experience</h1>
+        <h1 class="exp__title">
+            Commercial and non-commercial experience
+        </h1>
         <div class="exp__exp-content">
+            <div class="exp__job">
+                <span class="exp__date">Ноябрь 2024 — по настоящее время</span>
+                <span class="exp__duration">4 месяца</span>
+                <button class="exp__toggle" aria-expanded="false">Индивидуальное предпринимательство / частная практика / фриланс</button>
+                <div class="exp__details">
+                    <a href="https://mrak.tattoo/" target="_blank" class="exp__link">mrak.tattoo</a>
+                    <p>Услуги для населения</p>
+                    <h3>Веб-дизайнер</h3>
+                    <p>Создание дизайна лендинг-страниц, вёрстка, деплой, организация фотосъёмки, SEO, отладка.</p>
+                </div>
+            </div>
+            
+            <div class="exp__job">
+                <span class="exp__date">Август 2024 — Октябрь 2024</span>
+                <span class="exp__duration">3 месяца</span>
+                <button class="exp__toggle" aria-expanded="false">DataHeroes</button>
+                <div class="exp__details">
+                    <a href="https://app.dataheroes.pro/" target="_blank" class="exp__link">app.dataheroes.pro</a>
+                    <p>Информационные технологии, системная интеграция, интернет</p>
+                    <h3>Бэкенд-Разработчик</h3>
+                    <p>Разработка (Nest.js, Typescript, PostgreSQL, BigQuery), тестирование, поддержка и отладка кода до деплоя, рефакторинг.</p>
+                </div>
+            </div>
+            
+            <div class="exp__job">
+                <span class="exp__date">Декабрь 2023 — Июнь 2024</span>
+                <span class="exp__duration">7 месяцев</span>
+                <button class="exp__toggle" aria-expanded="false">Индивидуальное предпринимательство / частная практика / фриланс</button>
+                <div class="exp__details">
+                    <a href="https://errorayalcoffee.ru/" target="_blank" class="exp__link">errorayalcoffee.ru</a>
+                    <h3>Второй руководитель проектной работы, Full Stack - разработчик</h3>
+                    <p>Определение стека разработки, разработка (MySQL, PHP, HTML5, CSS3, React Native, Nest.js, MongoDB), отладка систем, администрирование баз данных, контроль выполнения работы специалистами.</p>
+                </div>
+            </div>
         </div>
     </article>
+    <ScrollButton target=".portfolio" client:load> Portfolio </ScrollButton>
 </section>

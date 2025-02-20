@@ -50,6 +50,7 @@
 }
 
 @mixin scroll-button {
+    z-index: 10;
     position: absolute;
     bottom: 20px;
     width: 10rem;

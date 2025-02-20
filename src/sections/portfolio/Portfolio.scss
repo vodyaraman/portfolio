@@ -1,4 +1,4 @@
-.exp {
+.portfolio {
     @include flexbox(column);
     z-index: 10;
     width: 100%;
@@ -24,7 +24,7 @@
         @include text-header(2.3rem, center, 600);
     }
 
-    &__exp-content {
+    &__portfolio-content {
             @include text-header(1.5rem, left, 400);
     }
 }
