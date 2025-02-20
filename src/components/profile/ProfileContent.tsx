@@ -35,7 +35,7 @@ export const TextTranslator = ({ className, content }: TextTranslatorProps) => {
     const isAnimating = useRef(false);
 
     const generateCyrillicDummy = (text: string): string => {
-        const chars = 'abekmhopctx';
+        const chars = 'abcdefghijklmnopqrstuvwxyz';
         return text.split('').map((char, index) => {
             if (char === ' ' || char === '\t' || char === '\n') return char;
             const randomChar = chars[Math.floor(Math.random() * chars.length)];
@@ -68,9 +68,8 @@ export const TextTranslator = ({ className, content }: TextTranslatorProps) => {
             animationInstances.current.push(timeline);
 
             timeline.to(el, {
-                duration: 0.15,
+                duration: 0.75,
                 text: generateCyrillicDummy(el.textContent || ''),
-                repeat: 2,
                 ease: "power2.inOut",
                 onRepeat: () => {
                     el.textContent = generateCyrillicDummy(el.textContent || '');
