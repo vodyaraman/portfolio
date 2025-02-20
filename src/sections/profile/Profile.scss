@@ -18,9 +18,9 @@
         z-index: 1;
         @include flexbox(column);
         @include absolute-fw();
-        padding: 5vh;
+        padding: 5vh 5vw;
         justify-content: flex-start;
-        max-width: 500px;
+        max-width: 600px;
         width: 100%;
         height: auto;
         gap: 10px;
@@ -36,7 +36,7 @@
             backdrop-filter: blur(4px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             transition: all 1s ease;
-            transform: translateX(5vw) translateY(10px);
+            transform: translateX(25%) translateY(10px);
             cursor: pointer;
 
             &:hover {
@@ -89,6 +89,17 @@
                     }
                 }
             }
+
+            &.download-cv {
+                transform: translateX(50%) translateY(0px);
+            }
+
+            &__download-cv-button {
+                @include no-def-styles();
+                @include flexbox(row);
+                gap: 15px;
+                cursor: pointer;
+            }
         }
     }
 
@@ -125,11 +136,11 @@
 @media (max-width: 500px) {
     .profile {
         &__content-wrapper {
-            padding: 7.5vh 15px;
+            padding: 4vh 15px;
 
             .profile-card {
                 transform: translateX(0) translateY(10px);
-                width: 100%;
+                width: 100% !important;
             }
         }
     }

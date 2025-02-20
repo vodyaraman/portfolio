@@ -4,6 +4,7 @@ import Content from "./Content.md";
 import ScrollButton from "@/components/ScrollButton";
 import ProfileAccount from "@/components/profile/ProfileAccount";
 import { TextTranslator } from "@/components/profile/ProfileContent";
+import DownloadResume from "@/components/profile/ProfileCV";
 
 const content = `
 ## Professional qualities
@@ -35,6 +36,7 @@ const content = `
         <TextTranslator content={content} client:only>
             <Content />
         </TextTranslator>
+        <DownloadResume client:visible/>
     </article>
     <ProfileBackgroundTheme client:only />
     <ScrollButton target=".about" client:load> Experience </ScrollButton>

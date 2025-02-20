@@ -89,20 +89,23 @@ export const TextTranslator = ({ className, content }: TextTranslatorProps) => {
     useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
-
-        const handleMouseEnter = () => playAnimation(true);
-        const handleMouseLeave = () => playAnimation(false);
-
-        container.addEventListener('mouseenter', handleMouseEnter);
-        container.addEventListener('mouseleave', handleMouseLeave);
+    
+        let isAnimating = false;
+    
+        const handleClick = () => {
+            isAnimating = !isAnimating;
+            playAnimation(isAnimating);
+        };
+    
+        container.addEventListener('click', handleClick);
         container.style.cursor = 'pointer';
-
+    
         return () => {
-            container.removeEventListener('mouseenter', handleMouseEnter);
-            container.removeEventListener('mouseleave', handleMouseLeave);
+            container.removeEventListener('click', handleClick);
             animationInstances.current.forEach(tl => tl.kill());
         };
     }, []);
+    
 
     return (
         <div ref={containerRef} className={`profile-content ${className || ''}`}>

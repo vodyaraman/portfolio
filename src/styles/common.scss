@@ -35,6 +35,7 @@
     user-select: none;
     -webkit-user-drag: none;
     border: none;
+    background-color: transparent;
 }
 
 @mixin text-header($font-size, $text-align, $font-weight) {
