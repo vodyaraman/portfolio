@@ -52,12 +52,14 @@ const ProfileCard = () => {
         >
           <img src='/icons/tg.svg' />
         </a>
-        <button
-          className="profile-card__copy-email"
-          onClick={handleCopyEmail}
+        <a
+          className="profile-card__link profile-card__link--github"
+          href="https://github.com/vodyaraman"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <img src='/icons/google.svg' />
-        </button>
+          <img src='/icons/github.svg' />
+        </a>
       </div>
     </aside>
   );
