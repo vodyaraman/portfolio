@@ -38,19 +38,17 @@ const IntroBackgroundTheme = () => {
       <directionalLight position={[0, 5, 6]} intensity={3} />
 
       <H1Intro
-        text="Introducing"
-        texturePath="/textures/leather.jpg"
+        text="INTRODUCING"
         positionY={2}
         fontPath="/fonts/Guerrilla/Protest_Guerrilla_Regular.typeface.json"
-        fontSize={0.9}
+        fontSize={0.8}
       />
 
       <H1Intro
-        text="saevskii.dev resume!"
-        texturePath="/textures/leather.jpg"
-        positionY={0.5}
+        text="SAEVSKII.DEV RESUME/CV"
+        positionY={0.7}
         fontPath="/fonts/Oswald/Oswald_Regular.typeface.json"
-        fontSize={0.8}
+        fontSize={0.6}
       />
       <CameraController />
 
