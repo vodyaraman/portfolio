@@ -1,23 +1,7 @@
 import { Canvas, useThree, useFrame } from '@react-three/fiber';
 import { useRef, useEffect } from 'react';
-import * as THREE from 'three';
 import H1Intro from './elements/H1Intro.tsx';
 import WindEffect from './elements/WindEffect.tsx';
-
-const BackgroundTexture = ({ texturePath }: { texturePath: string }) => {
-  const { scene } = useThree();
-  const texture = new THREE.TextureLoader().load(texturePath);
-
-
-  const planeGeometry = new THREE.PlaneGeometry(100, 100);
-  const planeMaterial = new THREE.MeshBasicMaterial({ map: texture});
-  const backgroundPlane = new THREE.Mesh(planeGeometry, planeMaterial);
-
-  backgroundPlane.position.z = -15;
-  scene.add(backgroundPlane);
-
-  return null;
-};
 
 const CameraController = () => {
   const { camera } = useThree();
@@ -28,6 +12,7 @@ const CameraController = () => {
     const handleMouseMove = (event: MouseEvent) => {
       const normalizedX = (event.clientX / window.innerWidth) * 2 - 1;
       mouseX.current = normalizedX;
+      console.log("Re-render!!!")
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -48,8 +33,7 @@ const CameraController = () => {
 
 const IntroBackgroundTheme = () => {
   return (
-    <Canvas camera={{ position: [0, 2, 10] }}>
-      <BackgroundTexture texturePath="/textures/icy-intro.webp"/>
+    <Canvas>
       <ambientLight intensity={0.5} />
       <directionalLight position={[0, 5, 6]} intensity={3} />
 
@@ -58,25 +42,19 @@ const IntroBackgroundTheme = () => {
         texturePath="/textures/leather.jpg"
         positionY={2}
         fontPath="/fonts/Guerrilla/Protest_Guerrilla_Regular.typeface.json"
+        fontSize={0.9}
       />
 
       <H1Intro
-        text="saevskii.dev showcase!"
+        text="saevskii.dev resume!"
         texturePath="/textures/leather.jpg"
-        positionY={-1}
+        positionY={0.5}
         fontPath="/fonts/Oswald/Oswald_Regular.typeface.json"
-        fontSize={1.5}
+        fontSize={0.8}
       />
       <CameraController />
 
       <WindEffect />
-
-      {/*
-      <Flag
-        position={[6, -8, 0]}
-        swingSpeed={2}
-      />*/}
-
     </Canvas>
   );
 };

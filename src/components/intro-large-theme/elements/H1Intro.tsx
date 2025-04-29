@@ -1,6 +1,6 @@
 import { Center, Text3D } from '@react-three/drei';
 import { useRef, useEffect, useState } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 interface H1IntroProps {
@@ -22,22 +22,16 @@ const H1Intro = ({
 }: H1IntroProps) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
-  const windStrength = 0.3;
-  const windSpeed = 2.0;
+
+  const [adaptiveFontSize, setAdaptiveFontSize] = useState(fontSize);
+  const [adaptivePositionY, setAdaptivePositionY] = useState(positionY);
+  const [adaptivePositionX, setAdaptivePositionX] = useState(0);
+
+  const windStrength = 0.1;
+  const windSpeed = 1.0;
   const windOffset = Math.random() * Math.PI;
 
-  const { size } = useThree();
-
-  // Удаляем статичное определение isMobile
-  const getAdaptiveValues = () => {
-    const isMobile = size.width < 768;
-    return {
-      fontSize: isMobile ? fontSize * 0.5 : fontSize,
-      positionY: isMobile ? positionY * 0.5 : positionY,
-      positionX: isMobile ? 1.1 : 0
-    };
-  };
-
+  // Загрузка текстуры один раз
   useEffect(() => {
     const loader = new THREE.TextureLoader();
     loader.load(texturePath, (loadedTexture) => {
@@ -45,23 +39,39 @@ const H1Intro = ({
     });
   }, [texturePath]);
 
+  // Обновляем адаптивные значения только при реальном ресайзе окна
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 768;
+      setAdaptiveFontSize(isMobile ? fontSize! * 0.75 : fontSize!);
+      setAdaptivePositionY(isMobile ? positionY * 0.75 : positionY);
+      setAdaptivePositionX(isMobile ? 1 : 0);
+    };
+
+    handleResize(); // Инициализация при первом рендере
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [fontSize, positionY]);
+
+  // Устанавливаем изначальные параметры
   useEffect(() => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = Math.PI / 5.5;
-      meshRef.current.rotation.x = 0.075;
-      // Обновляем только позицию Y
-      meshRef.current.position.y = getAdaptiveValues().positionY;
+      meshRef.current.rotation.x = rotationX;
+      meshRef.current.rotation.y = 0;
     }
-  }, [rotationX, positionY, size.width]); // Добавляем size.width в зависимости
+  }, [rotationX]);
 
+  // Управляем ветром отдельно
   useFrame(({ clock }) => {
     if (meshRef.current) {
-      const { positionX } = getAdaptiveValues();
       const time = clock.getElapsedTime();
       const windEffect = Math.sin(time * windSpeed + windOffset) * windStrength;
-      
-      // Комбинируем адаптивную позицию и эффект ветра
-      meshRef.current.position.x = positionX + windEffect;
+
+      meshRef.current.position.set(
+        adaptivePositionX + windEffect,
+        adaptivePositionY,
+        0
+      );
       meshRef.current.rotation.z = windEffect * 0.05;
     }
   });
@@ -71,9 +81,9 @@ const H1Intro = ({
       <Text3D
         ref={meshRef}
         font={fontPath}
-        size={getAdaptiveValues().fontSize}
+        size={adaptiveFontSize}
         height={0.5}
-        letterSpacing={-0.075}
+        letterSpacing={-0.025}
         curveSegments={12}
         bevelEnabled
         bevelThickness={0.03}

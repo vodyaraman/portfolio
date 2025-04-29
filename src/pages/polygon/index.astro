@@ -1,0 +1,100 @@
+---
+import "@/sections/intro/Intro.scss";
+import "@/sections/profile/Profile.scss";
+import "@/sections/3d-modelling/3d.scss";
+import "@/sections/exp/Exp.scss";
+import "@/sections/stack/Stack.scss";
+import "@/sections/portfolio/Portfolio.scss";
+import Layout from "@/layouts/Layout.astro";
+
+import BgLayerMiddle from "@/assets/intro-images/background-layer-middle.svg";
+import BgLayerTop from "@/assets/intro-images/background-layer-top.svg";
+import IntroBackgroundTheme from "@/components/intro-large-theme";
+import LogoScene from "@/components/scenes/LogoScene";
+---
+
+<Layout>
+	<main>
+		<section class="intro intro--hero">
+			<div class="intro__logo-wrapper">
+				<LogoScene client:only/>
+			</div>
+			<IntroBackgroundTheme client:only />
+		</section>
+		<section class="intro intro--second">
+			<img
+				class="intro__bg-layer intro__bg-layer--middle"
+				src={BgLayerMiddle.src}
+				draggable="false"
+			/>
+			<img
+				class="intro__bg-layer intro__bg-layer--top"
+				src={BgLayerTop.src}
+				draggable="false"
+			/>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.intro {
+		position: relative;
+		background-image: url("@/assets/intro-images/background-layer-bottom.svg");
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		filter: brightness(0.9) contrast(1.1);
+	}
+
+	.intro--second {
+		background-image: url("@/assets/intro-images/background2-layer-bottom.svg");
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		z-index: 2;
+	}
+
+	.intro__bg-layer {
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	.intro__bg-layer--middle {
+		transform: translateY(-105%);
+	}
+
+	.intro__bg-layer--top {
+		transform: translateY(-30%);
+	}
+
+	.intro__logo-wrapper {
+		position: absolute;
+		top: 55vh;
+		width: 100%;
+		height: 25vh;
+		background-color: transparent;
+	}
+</style>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	gsap.timeline({
+		scrollTrigger: {
+			trigger: ".intro--hero",
+			start: "top top",
+			end: "bottom top",
+			scrub: true,
+			pin: true,
+			pinSpacing: false,
+		}
+	})
+	.to(".intro--hero", { y: "-40%", ease: "none" }, 0)
+	.to(".intro__bg-layer--middle", { y: "-110%", ease: "none" }, 0);
+
+	console.log("Mounted");
+</script>
