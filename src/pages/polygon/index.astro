@@ -9,6 +9,7 @@ import Layout from "@/layouts/Layout.astro";
 
 import BgLayerTop from "@/assets/intro-images/background-layer-top.png";
 import Bg2LayerTop from "@/assets/intro-images/background2-layer-top.png";
+
 import IntroBackgroundTheme from "@/components/intro-large-theme";
 import LogoScene from "@/components/scenes/LogoScene";
 ---
@@ -17,17 +18,17 @@ import LogoScene from "@/components/scenes/LogoScene";
 	<main>
 		<section class="intro intro--hero">
 			<div class="intro__logo-wrapper">
-				<LogoScene client:only/>
+				<LogoScene client:only />
 			</div>
 			<IntroBackgroundTheme client:only />
 		</section>
 		<section class="intro intro--second">
 			<nav class="intro__nav-panel">
 				<a>General Info</a>
-				<a>Development Skill</a>
+				<a>Skills</a>
 				<a>About</a>
 				<a>Experiense</a>
-				<a>Project</a>
+				<a>Projects</a>
 			</nav>
 			<img
 				class="intro__bg-layer intro__bg-layer--top"
@@ -41,8 +42,24 @@ import LogoScene from "@/components/scenes/LogoScene";
 			/>
 		</section>
 		<section class="about">
-			<h1>Lorem Ipsum</h1>
-			<p>Dolor sit amet</p>
+			<article class="about__bio">
+				<h1>Anton Saevskii</h1>
+				<p>Junior Frontend Developer</p>
+
+				<ul>
+					<li><img src="/mainphotos/profile_photo.jpg" alt="avatar"/></li>
+					<li>
+						<a
+							href="https://www.google.com/maps/place/%D0%9C%D1%83%D1%80%D0%BC%D0%B0%D0%BD%D1%81%D0%BA,+%D0%9C%D1%83%D1%80%D0%BC%D0%B0%D0%BD%D1%81%D0%BA%D0%B0%D1%8F+%D0%BE%D0%B1%D0%BB.,+%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F/@68.9641468,32.9213112,11z/data=!3m1!4b1!4m6!3m5!1s0x44341030ed0c22d5:0x98c6ba30cbc321a5!8m2!3d68.9733113!4d33.0855849!16zL20vMGg0Y3Q?entry=ttu&g_ep=EgoyMDI1MDQyNy4xIKXMDSoASAFQAw%3D%3D"
+						>
+							Murmansk, Russia
+						</a>
+					</li>
+					<li>23 y.o. (05.04.2002)</li>
+					<li>a.vodyaraman@gmail.com</li>
+					<li></li>
+				</ul>
+			</article>
 		</section>
 	</main>
 </Layout>
@@ -50,8 +67,11 @@ import LogoScene from "@/components/scenes/LogoScene";
 <style>
 	main {
 		overflow-x: hidden;
+		background-color: #1d1d1d;
 	}
-	.intro {
+	.intro,
+	.intro--second,
+	.about {
 		position: relative;
 		background-image: url("@/assets/intro-images/background-layer-bottom.svg");
 		background-size: cover;
@@ -61,44 +81,51 @@ import LogoScene from "@/components/scenes/LogoScene";
 	}
 
 	.intro--second {
-		position: relative;
 		background-image: url("@/assets/intro-images/background2-layer-bottom.svg");
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
 		z-index: 2;
-
 	}
 
 	.intro__nav-panel {
 		position: absolute;
-		top: 40%;
+		top: 35%;
 		left: 20%;
 		width: min(90vw, 400px);
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
+		z-index: 10;
+	}
+
+	@media (max-width: 600px) {
+		.intro__nav-panel {
+			left: 5%;
+		}
 	}
 
 	.intro__nav-panel a {
 		width: 100%;
-		background-color: #f2ecec27;
+		background-color: #f2ecec17;
 		color: #e3f7ff;
-		font-size: 2.5rem;
+		backdrop-filter: blur(2px);
+		font-size: 1.5rem;
 		font-weight: 600;
 		text-align: center;
-		padding: 5px;
+		padding: 1rem 10px;
 		margin-bottom: 1rem;
 		border-radius: 12px;
 		cursor: pointer;
+		transition: all 0.3s ease;
+		text-transform: uppercase;
 	}
 
 	.intro__nav-panel a:hover {
 		color: #ffffff;
+		backdrop-filter: blur(5px);
 	}
 
-	.intro__bg-layer, .intro__bg2-layer {
+	.intro__bg-layer,
+	.intro__bg2-layer {
 		position: absolute;
 		top: 0;
 		width: 100%;
@@ -115,7 +142,7 @@ import LogoScene from "@/components/scenes/LogoScene";
 	}
 
 	.intro__bg2-layer--top {
-		transform: translateY(20vh);
+		transform: translateY(40vh);
 		min-width: 1200px;
 	}
 
@@ -128,12 +155,29 @@ import LogoScene from "@/components/scenes/LogoScene";
 	}
 
 	.about {
-		background: radial-gradient(#1D1D1D 0%, #1b1b1b 100%);
+		background-image: url("@/assets/intro-images/about-layer-bottom.png");
+		transform: translateY(-15px);
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
-	.about h1, .about p {
+	.about__bio {
+		height: fit-content;
+		max-height: 500px;
+	}
+
+	.about h1,
+	.about p,
+	.about li {
 		color: white;
 		z-index: 100;
+	}
+
+	.about img {
+		width: 100%;
+		max-height: 300px;
+		object-fit: cover;
 	}
 </style>
 
@@ -151,10 +195,10 @@ import LogoScene from "@/components/scenes/LogoScene";
 			scrub: true,
 			pin: true,
 			pinSpacing: false,
-		}
+		},
 	})
-	.to(".intro--hero", { y: "-40%", ease: "none" }, 0)
-	.to(".intro__bg-layer--middle", { y: "-110%", ease: "none" }, 0);
+		.to(".intro--hero", { y: "-40%", ease: "none" }, 0)
+		.to(".intro__bg-layer--middle", { y: "-110%", ease: "none" }, 0);
 
 	console.log("Mounted");
 </script>
