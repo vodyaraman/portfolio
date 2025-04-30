@@ -46,9 +46,9 @@ const IntroBackgroundTheme = () => {
 
       <H1Intro
         text="SAEVSKII.DEV RESUME/CV"
-        positionY={0.7}
+        positionY={0.8}
         fontPath="/fonts/Oswald/Oswald_Regular.typeface.json"
-        fontSize={0.6}
+        fontSize={0.5}
       />
       <CameraController />
 

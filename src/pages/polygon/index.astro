@@ -7,8 +7,8 @@ import "@/sections/stack/Stack.scss";
 import "@/sections/portfolio/Portfolio.scss";
 import Layout from "@/layouts/Layout.astro";
 
-import BgLayerMiddle from "@/assets/intro-images/background-layer-middle.svg";
-import BgLayerTop from "@/assets/intro-images/background-layer-top.svg";
+import BgLayerTop from "@/assets/intro-images/background-layer-top.png";
+import Bg2LayerTop from "@/assets/intro-images/background2-layer-top.png";
 import IntroBackgroundTheme from "@/components/intro-large-theme";
 import LogoScene from "@/components/scenes/LogoScene";
 ---
@@ -22,21 +22,35 @@ import LogoScene from "@/components/scenes/LogoScene";
 			<IntroBackgroundTheme client:only />
 		</section>
 		<section class="intro intro--second">
-			<img
-				class="intro__bg-layer intro__bg-layer--middle"
-				src={BgLayerMiddle.src}
-				draggable="false"
-			/>
+			<nav class="intro__nav-panel">
+				<a>General Info</a>
+				<a>Development Skill</a>
+				<a>About</a>
+				<a>Experiense</a>
+				<a>Project</a>
+			</nav>
 			<img
 				class="intro__bg-layer intro__bg-layer--top"
 				src={BgLayerTop.src}
 				draggable="false"
 			/>
+			<img
+				class="intro__bg2-layer intro__bg2-layer--top"
+				src={Bg2LayerTop.src}
+				draggable="false"
+			/>
+		</section>
+		<section class="about">
+			<h1>Lorem Ipsum</h1>
+			<p>Dolor sit amet</p>
 		</section>
 	</main>
 </Layout>
 
 <style>
+	main {
+		overflow-x: hidden;
+	}
 	.intro {
 		position: relative;
 		background-image: url("@/assets/intro-images/background-layer-bottom.svg");
@@ -47,25 +61,62 @@ import LogoScene from "@/components/scenes/LogoScene";
 	}
 
 	.intro--second {
+		position: relative;
 		background-image: url("@/assets/intro-images/background2-layer-bottom.svg");
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
 		z-index: 2;
+
 	}
 
-	.intro__bg-layer {
+	.intro__nav-panel {
+		position: absolute;
+		top: 40%;
+		left: 20%;
+		width: min(90vw, 400px);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.intro__nav-panel a {
+		width: 100%;
+		background-color: #f2ecec27;
+		color: #e3f7ff;
+		font-size: 2.5rem;
+		font-weight: 600;
+		text-align: center;
+		padding: 5px;
+		margin-bottom: 1rem;
+		border-radius: 12px;
+		cursor: pointer;
+	}
+
+	.intro__nav-panel a:hover {
+		color: #ffffff;
+	}
+
+	.intro__bg-layer, .intro__bg2-layer {
 		position: absolute;
 		top: 0;
 		width: 100%;
+		pointer-events: none;
 	}
 
-	.intro__bg-layer--middle {
-		transform: translateY(-105%);
+	.intro__bg2-layer {
+		top: unset;
+		bottom: 0;
 	}
-
 	.intro__bg-layer--top {
-		transform: translateY(-30%);
+		transform: translateY(-55%);
+		min-width: 1200px;
+	}
+
+	.intro__bg2-layer--top {
+		transform: translateY(20vh);
+		min-width: 1200px;
 	}
 
 	.intro__logo-wrapper {
@@ -74,6 +125,15 @@ import LogoScene from "@/components/scenes/LogoScene";
 		width: 100%;
 		height: 20vh;
 		background-color: transparent;
+	}
+
+	.about {
+		background: radial-gradient(#1D1D1D 0%, #1b1b1b 100%);
+	}
+
+	.about h1, .about p {
+		color: white;
+		z-index: 100;
 	}
 </style>
 
